@@ -1,0 +1,23 @@
+GreenDao
+历史记录History
+Schema s = new Schema(5, "com.greenDao.dao");
+
+    Entity sysNotity = s.addEntity("History");
+      sysNotity.addIdProperty().primaryKey().autoincrement();  //ID
+      sysNotity.addStringProperty("msgId");     // msgId
+      sysNotity.addLongProperty("msgTime");     // 时间戳
+      sysNotity.addStringProperty("msgBody");   // 内容
+      sysNotity.addIntProperty("msgType");      // 数据类型（用于RecycleView）
+      sysNotity.addIntProperty("groupId");      // 组ID（用于RecycleView）
+      sysNotity.addStringProperty("msgFrom");   // 数据来源
+      sysNotity.addIntProperty("msgStatus");    // 数据状态
+      sysNotity.addBooleanProperty("isAcked");  // 是否已读
+      sysNotity.addBooleanProperty("isDelivered"); // 展示或者不显示
+      sysNotity.addStringProperty("msgToken");  // Token
+
+// 生成代码
+try {
+    new DaoGenerator().generateAll(s, "../GreenDao/src/");
+} catch (Exception e) {
+    e.printStackTrace();
+}
