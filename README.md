@@ -27,20 +27,20 @@ Presenter
 
 - [Nucleus](https://github.com/konmik/nucleus)：MVP框架基础库，我使用的MVP基础类就是来源于他，感谢这位开发者。
 
-- [Gson](https://github.com/google/gson)：Google的json解析库。
+- [Gson](https://github.com/google/gson)：Google的json解析库。                                                                
 ####推荐Document
-- [RxReactive](http://reactivex.io/)
+* [RxReactive](http://reactivex.io/)
 
-- [Retrofit](http://square.github.io/retrofit/#contributing)
+* [Retrofit](http://square.github.io/retrofit/#contributing)
 
-- [Retrofit技术博文](https://futurestud.io/blog/retrofit-getting-started-and-android-client)
+* [Retrofit技术博文](https://futurestud.io/blog/retrofit-getting-started-and-android-client)
 
-- [MVP](http://www.tuicool.com/articles/uIjEJj7)
+* [MVP](http://www.tuicool.com/articles/uIjEJj7)
 
-- [Material Design中文版](http://wiki.jikexueyuan.com/project/material-design/)
+* [Material Design中文版](http://wiki.jikexueyuan.com/project/material-design/)
  
-- [RxJava技术博文](http://gank.io/post/560e15be2dca930e00da1083)
+* [RxJava技术博文](http://gank.io/post/560e15be2dca930e00da1083)
 
-- [MVP入坑文](https://github.com/bboyfeiyu/android-tech-frontier/blob/master/issue-12%2FAndroid%E4%B8%8AMVP%E7%9A%84%E4%BB%8B%E7%BB%8D.md#使用mvp)
+* [MVP入坑文](https://github.com/bboyfeiyu/android-tech-frontier/blob/master/issue-12%2FAndroid%E4%B8%8AMVP%E7%9A%84%E4%BB%8B%E7%BB%8D.md#使用mvp)
 ####Feture
   ......
