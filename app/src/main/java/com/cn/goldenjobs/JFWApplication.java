@@ -20,6 +20,7 @@ public class JFWApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        mApplication = this;
         mainThreadId = Process.myTid();
         AppControler.getInstance().init();
     }

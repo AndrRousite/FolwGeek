@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.cn.goldenjobs.bean.User;
 import com.cn.goldenjobs.dao.DaoMaster;
 import com.cn.goldenjobs.dao.DaoSession;
 import com.iyiyo.utils.SPUtils;
@@ -20,6 +21,9 @@ import java.util.Hashtable;
  * @since 2013-8-7 下午5:22:39
  */
 public final class AppControler{
+
+    // 用户数据
+    public static User LOACL_LOGINED_USER;
 
     private static AppControler mAppControler;
 
@@ -91,5 +95,9 @@ public final class AppControler{
             e.printStackTrace();
         } finally {
         }
+    }
+
+    public boolean isLogin(){
+        return LOACL_LOGINED_USER != null;
     }
 }

@@ -3,6 +3,7 @@ package com.iyiyo.mvp.ui.activity;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.iyiyo.mvp.manager.DeviceManager;
 import com.iyiyo.mvp.model.SharePreferenceManager;
@@ -38,5 +39,9 @@ public abstract class BaseActivity<P extends Presenter> extends NucleusActivity<
         if (isFinishing()){
             DeviceManager.hideSoftInput(this, getCurrentFocus());
         }
+    }
+
+    public void showToast(String text) {
+        new Handler().obtainMessage(0x1001,text).sendToTarget();
     }
 }

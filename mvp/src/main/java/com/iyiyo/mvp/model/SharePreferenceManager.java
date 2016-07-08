@@ -61,6 +61,10 @@ public class SharePreferenceManager {
         public static final String KEY_USERNAME = "KEY_USERNAME";
         public static final String KEY_PASSWORD = "KEY_PASSWORD";
         public static final String KEY_GENDER = "KEY_GENDER";
+        public static final String KEY_HEADFILE = "KEY_HEADFILE";
+        public static final String KEY_ACCOUNT = "KEY_ACCOUNT";
+        public static final String KEY_PHONENAME = "KEY_PHONENAME";
+        public static final String KEY_PHONENUMBER = "KEY_PHONENUMBER";
         public static final String KEY_NICK = "KEY_NICK";
         public static final String KEY_SKILL_SCORE = "KEY_SKILL_SCORE";
         public static final String KEY_UID = "KEY_UID";
