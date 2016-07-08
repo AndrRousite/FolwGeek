@@ -6,6 +6,7 @@
 
     <!--base color setting-->
     <color name="transparent">#00000000</color>
+    <color name="bg_white">#f6f6f6</color>
 
     <!-- swipe refresh color -->
     <color name="swipe_refresh_first">#ff00ddff</color>

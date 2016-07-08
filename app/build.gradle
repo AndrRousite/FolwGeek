@@ -40,4 +40,7 @@ dependencies {
 
     // ButterKnife DI
     compile 'com.jakewharton:butterknife:7.0.1'
+
+    // circle image view
+    compile 'de.hdodenhof:circleimageview:2.0.0'
 }
