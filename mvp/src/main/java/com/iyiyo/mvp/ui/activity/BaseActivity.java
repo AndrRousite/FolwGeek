@@ -1,5 +1,6 @@
 package com.iyiyo.mvp.ui.activity;
 
+import com.iyiyo.mvp.ActivityManager;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -29,6 +30,8 @@ public abstract class BaseActivity<P extends Presenter> extends NucleusActivity<
             setTheme(ApplicationTheme.DARK.getResId());
         }
 
+        ActivityManager.getActivityManager().addActivity(this);
+
         // 方向锁定
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
@@ -39,6 +42,12 @@ public abstract class BaseActivity<P extends Presenter> extends NucleusActivity<
         if (isFinishing()){
             DeviceManager.hideSoftInput(this, getCurrentFocus());
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        ActivityManager.getActivityManager().removeActivity(this);
+        super.onDestroy();
     }
 
     public void showToast(String text) {

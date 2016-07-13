@@ -1,4 +1,4 @@
-package com.cn.goldenjobs;
+package com.iyiyo.mvp;
 
 import android.app.Activity;
 

@@ -12,5 +12,10 @@
         <item name="android:windowBackground">@mipmap/welcome</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+    <style name="Theme.Home" parent="AppTheme">
+        <item name="colorPrimary">@color/colorPrimary_home</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_home</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary_home</item>
+    </style>
 
 </resources>

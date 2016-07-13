@@ -1,5 +1,6 @@
 package com.cn.goldenjobs.ui.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -76,5 +77,18 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.nav_main,menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_search: //
+                startActivity(new Intent(this,HomeActivity.class));
+                break;
+            case R.id.menu_reminder:  // 闹铃
+                break;
+        }
+
+        return true;
     }
 }

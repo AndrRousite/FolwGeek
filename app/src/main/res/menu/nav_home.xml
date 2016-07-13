@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:td="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_android"
+        android:title="@string/android"
+        android:icon="@mipmap/ic_android"
+        td:showAsAction="always"/>
+    <item
+        android:id="@+id/menu_apple"
+        android:title="@string/apple"
+        android:icon="@mipmap/ic_apple"
+        td:showAsAction="always"/>
+    <item
+        android:id="@+id/menu_windows"
+        android:title="@string/windows"
+        android:icon="@mipmap/ic_windows"
+        td:showAsAction="always"/>
+    <item
+        android:id="@+id/menu_more"
+        android:title="@string/more"
+        android:icon="@mipmap/ic_search"
+        td:showAsAction="never"/>
+</menu>
