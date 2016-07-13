@@ -42,6 +42,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //        }
 
         layoutDrawer.setScrimColor(Color.TRANSPARENT);  // 设置DrawerLayout背景色
+        navView.getChildAt(0).setVerticalScrollBarEnabled(false);  // 去掉侧边栏的滚动条
 
         toolbar.setTitle("");
         toolbar.setSubtitle(getResources().getString(R.string.app_name));
