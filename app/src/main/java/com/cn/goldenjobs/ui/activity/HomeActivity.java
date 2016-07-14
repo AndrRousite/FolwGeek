@@ -18,9 +18,9 @@ import android.widget.TextView;
 import com.cn.goldenjobs.R;
 import com.cn.goldenjobs.config.JFWConstans;
 import com.cn.goldenjobs.interf.OnTabReselectListener;
+import com.cn.goldenjobs.ui.activity.tabhost.Table;
 import com.iyiyo.mvp.ui.activity.BaseActivity;
 import com.iyiyo.uikit.BottomFragmentTabHost;
-import com.iyiyo.uikit.tabhost.Table;
 import com.iyiyo.utils.SPUtils;
 
 import butterknife.Bind;
