@@ -1,5 +1,6 @@
 package com.cn.goldenjobs.ui.activity.tabhost;
 
+import com.cn.goldenjobs.ui.fragment.ExampleFragment;
 import com.iyiyo.mvp.ui.fragment.BaseFragment;
 import com.iyiyo.utils.R;
 
@@ -11,14 +12,16 @@ import com.iyiyo.utils.R;
  */
 public enum Table {
 
-    MODULE(0, R.string.tab_name_module, R.drawable.iconfont_webzhuye,
-            BaseFragment.class),
-    NEWS(0, R.string.tab_name_news, R.drawable.iconfont_zhaomingdianzi,
-            BaseFragment.class),
-    MESSAGE(0, R.string.tab_name_module, R.drawable.iconfont_qicheyongpin,
-            BaseFragment.class),
-    MINE(0, R.string.tab_name_module, R.drawable.iconfont_fuwushichang,
-            BaseFragment.class);
+    MODULE(0, R.string.tab_name_module, R.drawable.selector_module,
+            ExampleFragment.class),
+    NEWS(1, R.string.tab_name_news, R.drawable.selector_news,
+            ExampleFragment.class),
+    CENTER(2, R.string.tab_name_center, R.drawable.selector_center,
+            null),
+    MESSAGE(3, R.string.tab_name_message, R.drawable.selector_message,
+            ExampleFragment.class),
+    MINE(4, R.string.tab_name_mine, R.drawable.selector_mine,
+            ExampleFragment.class);
 
     private int idx;
     private int resName;
