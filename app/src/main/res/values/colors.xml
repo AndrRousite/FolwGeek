@@ -6,5 +6,6 @@
 
     <color name="colorPrimary_home">#3a3a3a</color>
     <color name="colorPrimaryDark_home">#3a3a3a</color>
-    <color name="textColorPrimary_home">#383838</color>
+    <color name="textColorPrimary_home">#666666</color>
+    <color name="textColorPrimary_home_selector">#00B589</color>
 </resources>

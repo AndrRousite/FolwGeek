@@ -1,4 +1,7 @@
-package com.iyiyo.uikit.tabhost;
+package com.cn.goldenjobs.ui.activity.tabhost;
+
+import com.iyiyo.mvp.ui.fragment.BaseFragment;
+import com.iyiyo.utils.R;
 
 /**
  * 地步导航条的Item
@@ -8,24 +11,14 @@ package com.iyiyo.uikit.tabhost;
  */
 public enum Table {
 
-//	NEWS(0, R.string.main_tab_name_news, R.drawable.tab_icon_new,
-//			NewsViewPagerFragment.class),
-
-//    NEWS(0, R.string.main_tab_name_news, R.drawable.tab_icon_new,
-//            GeneralViewPagerFragment.class),
-//
-//    TWEET(1, R.string.main_tab_name_tweet, R.drawable.tab_icon_tweet,
-//            TweetsViewPagerFragment.class),
-//
-//    QUICK(2, R.string.main_tab_name_quick, R.drawable.tab_icon_new,
-//            null),
-//
-//    EXPLORE(3, R.string.main_tab_name_explore, R.drawable.tab_icon_explore,
-//            ExploreFragment.class),
-//
-//    ME(4, R.string.main_tab_name_my, R.drawable.tab_icon_me,
-//            MyInformationFragment.class);
-    ;  // TODO
+    MODULE(0, R.string.tab_name_module, R.drawable.iconfont_webzhuye,
+            BaseFragment.class),
+    NEWS(0, R.string.tab_name_news, R.drawable.iconfont_zhaomingdianzi,
+            BaseFragment.class),
+    MESSAGE(0, R.string.tab_name_module, R.drawable.iconfont_qicheyongpin,
+            BaseFragment.class),
+    MINE(0, R.string.tab_name_module, R.drawable.iconfont_fuwushichang,
+            BaseFragment.class);
 
     private int idx;
     private int resName;

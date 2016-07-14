@@ -25,12 +25,12 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/main_division_color">
+        android:background="@color/main_background_color">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/main_division_color" />
+            android:background="@color/main_background_color" />
 
         <com.iyiyo.uikit.BottomFragmentTabHost
             android:id="@android:id/tabhost"
