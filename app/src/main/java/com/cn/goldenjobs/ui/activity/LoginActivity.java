@@ -31,7 +31,6 @@ public class LoginActivity extends BaseHoldBackActivity<LoginPresenter> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
     }
 
     @Override

@@ -27,5 +27,11 @@
     <string name="open">打开</string>
     <string name="close">关闭</string>
 
+    <string name="tab_name_module">Module</string>
+    <string name="tab_name_news">发现</string>
+    <string name="tab_name_center">Home</string>
+    <string name="tab_name_message">消息</string>
+    <string name="tab_name_mine">我</string>
+
 
 </resources>
