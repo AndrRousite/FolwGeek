@@ -25,11 +25,19 @@ import butterknife.ButterKnife;
 public abstract class BaseFragment<P extends Presenter> extends NucleusFragment<P>
         implements View.OnClickListener, BaseFragmentInterface {
 
-    public Activity mContext;
-    public Resources resources;
+    protected Activity mContext;
+    protected Resources resources;
+    protected LayoutInflater mInflater;
     private long lastClickTime = 0;
 
     public static final String BUNDLE_TYPE = "BUNDLE_TYPE";
+
+    public static final int STATE_NONE = 0;
+    public static final int STATE_REFRESH = 1;
+    public static final int STATE_LOADMORE = 2;
+    public static final int STATE_NOMORE = 3;
+    public static final int STATE_PRESSNONE = 4;// 正在下拉但还没有到刷新的状态
+    public static int mState = STATE_NONE;  // 当前的状态（0/1/2/3/4）
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +49,7 @@ public abstract class BaseFragment<P extends Presenter> extends NucleusFragment<
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        this.mInflater = inflater;
         View view = inflater.inflate(getResourceId(), container, false);
         ButterKnife.bind(this, view);
         initView(view);
@@ -53,7 +62,7 @@ public abstract class BaseFragment<P extends Presenter> extends NucleusFragment<
         long currentTime = Calendar.getInstance().getTimeInMillis();
         if (currentTime - lastClickTime > 1000) {
             lastClickTime = currentTime;
-            onClick(v);
+            onClick(v.getId());
         }
     }
 

@@ -17,5 +17,5 @@ public interface BaseFragmentInterface {
 	
 	public void initData();
 
-	public void onClick(View v);
+	public void onClick(int v);
 }
