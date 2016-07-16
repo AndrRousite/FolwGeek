@@ -32,13 +32,6 @@ public abstract class BaseFragment<P extends Presenter> extends NucleusFragment<
 
     public static final String BUNDLE_TYPE = "BUNDLE_TYPE";
 
-    public static final int STATE_NONE = 0;
-    public static final int STATE_REFRESH = 1;
-    public static final int STATE_LOADMORE = 2;
-    public static final int STATE_NOMORE = 3;
-    public static final int STATE_PRESSNONE = 4;// 正在下拉但还没有到刷新的状态
-    public static int mState = STATE_NONE;  // 当前的状态（0/1/2/3/4）
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
