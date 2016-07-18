@@ -10,27 +10,26 @@
         android:id="@+id/pager_tabstrip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/windows_bg"
-        app:allowWidthFull="true"
-        app:slidingBlock="?attr/sliding_block_bg" >
+        app:allowWidthFull="true" >
     </com.iyiyo.mvc.ui.widget.viewpage.PagerSlidingTabStrip>
 
     <View
         android:id="@+id/view_pager_line"
         android:layout_width="match_parent"
         android:layout_below="@id/pager_tabstrip"
-        android:layout_height="1px"
-        android:background="?attr/lineColor" />
+        android:layout_height="1px" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
-        style="@style/fill_fill"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_below="@id/view_pager_line">
     </android.support.v4.view.ViewPager>
 
     <com.iyiyo.mvc.ui.widget.empty.EmptyLayout
         android:id="@+id/error_layout"
-        style="@style/fill_fill"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:visibility="gone" />
 
 </RelativeLayout>

@@ -105,6 +105,11 @@ public class ModuleFragment extends BaseFragment implements LazyScrollView.OnScr
     }
 
     @Override
+    public void onClick(int v) {
+
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
     }

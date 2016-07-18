@@ -41,11 +41,6 @@ public abstract class BaseActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if ((Boolean) SPUtils.get(this, Properties.Theme_Module,false)) {
-            setTheme(R.style.AppBaseTheme_Night);
-        } else {
-            setTheme(R.style.AppBaseTheme_Light);
-        }
         ActivityManager.getActivityManager().addActivity(this);
         setContentView(getResourceId());
         mInflater = getLayoutInflater();

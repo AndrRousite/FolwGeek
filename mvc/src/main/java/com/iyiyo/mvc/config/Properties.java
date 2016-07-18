@@ -12,6 +12,7 @@ public class Properties {
 
     public final static int PageSize = 7;
     public final static String Theme_Module = "theme_module"; // 夜间风格
+    public final static String UNIQUE_ID = "uniqueid"; // 手机唯一标识
     // 默认存放图片的路径
     public final static String DEFAULT_SAVE_IMAGE_PATH = Environment
             .getExternalStorageDirectory()

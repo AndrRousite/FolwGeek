@@ -3,7 +3,6 @@
     android:id="@+id/emoji_title"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/layout_item_bg"
     android:gravity="center_vertical"
     android:orientation="horizontal">
 

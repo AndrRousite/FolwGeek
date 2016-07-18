@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.widget.TextView;
 
+import com.iyiyo.mvc.app.BaseApplication;
+
 
 /**
  * Typeface工具类 用于设置字体图标
@@ -17,7 +19,7 @@ import android.widget.TextView;
 public class TypefaceUtils {
 
     private static Typeface getTypeface() {
-        Context context = AppControler.getInstance();
+        Context context = BaseApplication.getInstance();
 
         Typeface font = Typeface.createFromAsset(context.getAssets(),
                 "fontawesome-webfont.ttf");
@@ -35,13 +37,13 @@ public class TypefaceUtils {
     }
 
     public static void setTypefaceWithColor(TextView tv, int textId, int colorId) {
-        tv.setTextColor(AppControler.getInstance().getResources()
+        tv.setTextColor(BaseApplication.getInstance().getResources()
                 .getColor(colorId));
         setTypeface(tv, textId);
     }
 
     public static void setTypefaceWithColor(TextView tv, int colorId) {
-        tv.setTextColor(AppControler.getInstance().getResources()
+        tv.setTextColor(BaseApplication.getInstance().getResources()
                 .getColor(colorId));
         setTypeface(tv);
     }
@@ -57,7 +59,7 @@ public class TypefaceUtils {
     }
 
     public static void setTypeface(TextView tv, int textId) {
-        setTypeface(tv, AppControler.getInstance().getString(textId));
+        setTypeface(tv, BaseApplication.getInstance().getString(textId));
     }
 
     public static void setTypeface(TextView tv, String text) {
@@ -68,7 +70,7 @@ public class TypefaceUtils {
     }
 
     public static void setTypeFaceWithText(TextView tv, int faRes, String text) {
-        String lastText = AppControler.getInstance().getResources().getString(faRes) + " " + text;
+        String lastText = BaseApplication.getInstance().getResources().getString(faRes) + " " + text;
         setTypeface(tv, lastText);
     }
 

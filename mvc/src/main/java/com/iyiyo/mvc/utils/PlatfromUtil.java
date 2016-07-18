@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.iyiyo.mvc.R;
+import com.iyiyo.mvc.app.BaseApplication;
 
 
 /**
@@ -38,7 +39,7 @@ public class PlatfromUtil {
             default:
                 tv.setVisibility(View.GONE);
         }
-        String platFromStr = AppControler.getInstance().getResources().getString(resId);
+        String platFromStr = BaseApplication.getInstance().getResources().getString(resId);
         TypefaceUtils.setTypeFaceWithText(tv, R.string.fa_mobile, platFromStr);
     }
 }

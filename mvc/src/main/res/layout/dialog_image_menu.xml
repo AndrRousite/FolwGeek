@@ -7,10 +7,8 @@
         android:id="@+id/menu1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/layout_item_bg"
         android:gravity="center"
         android:padding="15dp"
-        android:textColor="?attr/textColor"
         android:text="保存图片"
         android:textSize="18sp" />
 
@@ -19,10 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/menu1"
-        android:background="?attr/layout_item_bg"
         android:gravity="center"
         android:padding="15dp"
-        android:textColor="?attr/textColor"
         android:text="发送到..."
         android:textSize="18sp" />
 
@@ -31,10 +27,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/menu2"
-        android:background="?attr/layout_item_bg"
         android:gravity="center"
         android:padding="15dp"
-        android:textColor="?attr/textColor"
         android:text="复制图片链接"
         android:textSize="18sp" />
 

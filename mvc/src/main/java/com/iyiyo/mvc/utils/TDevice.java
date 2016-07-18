@@ -39,6 +39,8 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.iyiyo.mvc.R;
 import com.iyiyo.mvc.app.BaseApplication;
+import com.iyiyo.mvc.config.Properties;
+import com.iyiyo.utils.SPUtils;
 
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class TDevice {
@@ -74,7 +76,7 @@ public class TDevice {
 
     public static int getDefaultLoadFactor() {
         if (_loadFactor == null) {
-            Integer integer = Integer.valueOf(0xf & BaseApplication.context()
+            Integer integer = Integer.valueOf(0xf & BaseApplication.getContext()
                     .getResources().getConfiguration().screenLayout);
             _loadFactor = integer;
             _loadFactor = Integer.valueOf(Math.max(integer.intValue(), 1));
@@ -90,7 +92,7 @@ public class TDevice {
 
     public static DisplayMetrics getDisplayMetrics() {
         DisplayMetrics displaymetrics = new DisplayMetrics();
-        ((WindowManager) BaseApplication.context().getSystemService(
+        ((WindowManager) BaseApplication.getContext().getSystemService(
                 Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(
                 displaymetrics);
         return displaymetrics;
@@ -148,7 +150,7 @@ public class TDevice {
             obj = c.newInstance();
             field = c.getField("status_bar_height");
             x = Integer.parseInt(field.get(obj).toString());
-            return BaseApplication.context().getResources()
+            return BaseApplication.getContext().getResources()
                     .getDimensionPixelSize(x);
         } catch (Exception e) {
             e.printStackTrace();
@@ -157,13 +159,10 @@ public class TDevice {
     }
 
     public static String getUdid() {
-        String udid = BaseApplication.getPreferences().getString("udid", "");
+        String udid = BaseApplication.getInstance().getAppId();
         if (udid.length() == 0) {
-            SharedPreferences.Editor editor = BaseApplication.getPreferences()
-                    .edit();
             udid = String.format("%s", UUID.randomUUID());
-            editor.putString("udid", udid);
-            editor.commit();
+            SPUtils.put(BaseApplication.getContext(), Properties.UNIQUE_ID, udid);
         }
         return udid;
     }
@@ -172,7 +171,7 @@ public class TDevice {
         boolean flag = true;
         if (_hasBigScreen == null) {
             boolean flag1;
-            if ((0xf & BaseApplication.context().getResources()
+            if ((0xf & BaseApplication.getContext().getResources()
                     .getConfiguration().screenLayout) >= 3)
                 flag1 = flag;
             else
@@ -190,7 +189,7 @@ public class TDevice {
 
     public static final boolean hasCamera() {
         if (_hasCamera == null) {
-            PackageManager pckMgr = BaseApplication.context()
+            PackageManager pckMgr = BaseApplication.getContext()
                     .getPackageManager();
             boolean flag = pckMgr
                     .hasSystemFeature("android.hardware.camera.front");
@@ -218,7 +217,7 @@ public class TDevice {
 
     public static boolean hasInternet() {
         boolean flag;
-        if (((ConnectivityManager) BaseApplication.context().getSystemService(
+        if (((ConnectivityManager) BaseApplication.getContext().getSystemService(
                 "connectivity")).getActiveNetworkInfo() != null)
             flag = true;
         else
@@ -242,7 +241,7 @@ public class TDevice {
 
     public static boolean isPackageExist(String pckName) {
         try {
-            PackageInfo pckInfo = BaseApplication.context().getPackageManager()
+            PackageInfo pckInfo = BaseApplication.getContext().getPackageManager()
                     .getPackageInfo(pckName, 0);
             if (pckInfo != null)
                 return true;
@@ -260,14 +259,14 @@ public class TDevice {
     public static void hideSoftKeyboard(View view) {
         if (view == null)
             return;
-        ((InputMethodManager) BaseApplication.context().getSystemService(
+        ((InputMethodManager) BaseApplication.getContext().getSystemService(
                 Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
                 view.getWindowToken(), 0);
     }
 
     public static boolean isLandscape() {
         boolean flag;
-        if (BaseApplication.context().getResources().getConfiguration().orientation == 2)
+        if (BaseApplication.getContext().getResources().getConfiguration().orientation == 2)
             flag = true;
         else
             flag = false;
@@ -276,7 +275,7 @@ public class TDevice {
 
     public static boolean isPortrait() {
         boolean flag = true;
-        if (BaseApplication.context().getResources().getConfiguration().orientation != 1)
+        if (BaseApplication.getContext().getResources().getConfiguration().orientation != 1)
             flag = false;
         return flag;
     }
@@ -284,7 +283,7 @@ public class TDevice {
     public static boolean isTablet() {
         if (_isTablet == null) {
             boolean flag;
-            if ((0xf & BaseApplication.context().getResources()
+            if ((0xf & BaseApplication.getContext().getResources()
                     .getConfiguration().screenLayout) >= 3)
                 flag = true;
             else
@@ -308,13 +307,13 @@ public class TDevice {
     }
 
     public static void showSoftKeyboard(View view) {
-        ((InputMethodManager) BaseApplication.context().getSystemService(
+        ((InputMethodManager) BaseApplication.getContext().getSystemService(
                 Context.INPUT_METHOD_SERVICE)).showSoftInput(view,
                 InputMethodManager.SHOW_FORCED);
     }
 
     public static void toogleSoftKeyboard(View view) {
-        ((InputMethodManager) BaseApplication.context().getSystemService(
+        ((InputMethodManager) BaseApplication.getContext().getSystemService(
                 Context.INPUT_METHOD_SERVICE)).toggleSoftInput(0,
                 InputMethodManager.HIDE_NOT_ALWAYS);
     }
@@ -325,15 +324,15 @@ public class TDevice {
     }
 
     public static String getCurCountryLan() {
-        return BaseApplication.context().getResources().getConfiguration().locale
+        return BaseApplication.getContext().getResources().getConfiguration().locale
                 .getLanguage()
                 + "-"
-                + BaseApplication.context().getResources().getConfiguration().locale
+                + BaseApplication.getContext().getResources().getConfiguration().locale
                 .getCountry();
     }
 
     public static boolean isZhCN() {
-        String lang = BaseApplication.context().getResources()
+        String lang = BaseApplication.getContext().getResources()
                 .getConfiguration().locale.getCountry();
         if (lang.equalsIgnoreCase("CN")) {
             return true;
@@ -361,14 +360,14 @@ public class TDevice {
 
     public static void gotoMarket(Context context, String pck) {
         if (!isHaveMarket(context)) {
-            AppControler.showToast("你手机中没有安装应用市场！");
+            BaseApplication.showToast("你手机中没有安装应用市场！");
             return;
         }
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
         intent.setData(Uri.parse("market://details?id=" + pck));
-        if (intent.resolveActivity(context.getPackageManager()) != null) {
-            context.startActivity(intent);
+        if (intent.resolveActivity(BaseApplication.getInstance().getPackageManager()) != null) {
+            BaseApplication.getContext().startActivity(intent);
         }
     }
 
@@ -420,7 +419,7 @@ public class TDevice {
 
     public static PackageInfo getPackageInfo(String pckName) {
         try {
-            return BaseApplication.context().getPackageManager()
+            return BaseApplication.getContext().getPackageManager()
                     .getPackageInfo(pckName, 0);
         } catch (NameNotFoundException e) {
             TLog.error(e.getMessage());
@@ -431,9 +430,9 @@ public class TDevice {
     public static int getVersionCode() {
         int versionCode = 0;
         try {
-            versionCode = AppControler.getInstance()
+            versionCode = BaseApplication.getInstance()
                     .getPackageManager()
-                    .getPackageInfo(AppControler.getInstance().getPackageName(),
+                    .getPackageInfo(BaseApplication.getInstance().getPackageName(),
                             0).versionCode;
         } catch (Exception ex) {
             versionCode = 0;
@@ -444,7 +443,7 @@ public class TDevice {
     public static int getVersionCode(String packageName) {
         int versionCode = 0;
         try {
-            versionCode = BaseApplication.context().getPackageManager()
+            versionCode = BaseApplication.getContext().getPackageManager()
                     .getPackageInfo(packageName, 0).versionCode;
         } catch (NameNotFoundException ex) {
             versionCode = 0;
@@ -456,9 +455,9 @@ public class TDevice {
         String name = "";
         try {
             name = BaseApplication
-                    .context()
+                    .getContext()
                     .getPackageManager()
-                    .getPackageInfo(BaseApplication.context().getPackageName(),
+                    .getPackageInfo(BaseApplication.getContext().getPackageName(),
                             0).versionName;
         } catch (NameNotFoundException ex) {
             name = "";
@@ -467,12 +466,12 @@ public class TDevice {
     }
 
     public static boolean isScreenOn() {
-        PowerManager pm = (PowerManager) BaseApplication.context()
+        PowerManager pm = (PowerManager) BaseApplication.getContext()
                 .getSystemService(Context.POWER_SERVICE);
         return pm.isScreenOn();
     }
 
-    public static void installAPK(Context context, File file) {
+    public static void installAPK(Context getContext, File file) {
         if (file == null || !file.exists())
             return;
         Intent intent = new Intent();
@@ -480,7 +479,7 @@ public class TDevice {
         intent.setAction(Intent.ACTION_VIEW);
         intent.setDataAndType(Uri.fromFile(file),
                 "application/vnd.android.package-archive");
-        context.startActivity(intent);
+        getContext.startActivity(intent);
     }
 
     public static Intent getInstallApkIntent(File file) {
@@ -492,41 +491,41 @@ public class TDevice {
         return intent;
     }
 
-    public static void openDial(Context context, String number) {
+    public static void openDial(Context getContext, String number) {
         Uri uri = Uri.parse("tel:" + number);
         Intent it = new Intent(Intent.ACTION_DIAL, uri);
-        context.startActivity(it);
+        getContext.startActivity(it);
     }
 
-    public static void openSMS(Context context, String smsBody, String tel) {
+    public static void openSMS(Context getContext, String smsBody, String tel) {
         Uri uri = Uri.parse("smsto:" + tel);
         Intent it = new Intent(Intent.ACTION_SENDTO, uri);
         it.putExtra("sms_body", smsBody);
-        context.startActivity(it);
+        getContext.startActivity(it);
     }
 
-    public static void openDail(Context context) {
+    public static void openDail(Context getContext) {
         Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
+        getContext.startActivity(intent);
     }
 
-    public static void openSendMsg(Context context) {
+    public static void openSendMsg(Context getContext) {
         Uri uri = Uri.parse("smsto:");
         Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
+        getContext.startActivity(intent);
     }
 
-    public static void openCamera(Context context) {
+    public static void openCamera(Context getContext) {
         Intent intent = new Intent(); // 调用照相机
         intent.setAction("android.media.action.STILL_IMAGE_CAMERA");
         intent.setFlags(0x34c40000);
-        context.startActivity(intent);
+        getContext.startActivity(intent);
     }
 
     public static String getIMEI() {
-        TelephonyManager tel = (TelephonyManager) BaseApplication.context()
+        TelephonyManager tel = (TelephonyManager) BaseApplication.getContext()
                 .getSystemService(Context.TELEPHONY_SERVICE);
         return tel.getDeviceId();
     }
@@ -535,25 +534,25 @@ public class TDevice {
         return Build.MODEL;
     }
 
-    public static void openApp(Context context, String packageName) {
-        Intent mainIntent = BaseApplication.context().getPackageManager()
+    public static void openApp(Context getContext, String packageName) {
+        Intent mainIntent = BaseApplication.getContext().getPackageManager()
                 .getLaunchIntentForPackage(packageName);
         if (mainIntent == null) {
             mainIntent = new Intent(packageName);
         } else {
             TLog.log("Action:" + mainIntent.getAction());
         }
-        context.startActivity(mainIntent);
+        getContext.startActivity(mainIntent);
     }
 
-    public static boolean openAppActivity(Context context, String packageName,
+    public static boolean openAppActivity(Context getContext, String packageName,
                                           String activityName) {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
         ComponentName cn = new ComponentName(packageName, activityName);
         intent.setComponent(cn);
         try {
-            context.startActivity(intent);
+            getContext.startActivity(intent);
             return true;
         } catch (Exception e) {
             return false;
@@ -563,7 +562,7 @@ public class TDevice {
     public static boolean isWifiOpen() {
         boolean isWifiConnect = false;
         ConnectivityManager cm = (ConnectivityManager) BaseApplication
-                .context().getSystemService(Context.CONNECTIVITY_SERVICE);
+                .getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         // check the networkInfos numbers
         NetworkInfo[] networkInfos = cm.getAllNetworkInfo();
         for (int i = 0; i < networkInfos.length; i++) {
@@ -579,12 +578,12 @@ public class TDevice {
         return isWifiConnect;
     }
 
-    public static void uninstallApk(Context context, String packageName) {
+    public static void uninstallApk(Context getContext, String packageName) {
         if (isPackageExist(packageName)) {
             Uri packageURI = Uri.parse("package:" + packageName);
             Intent uninstallIntent = new Intent(Intent.ACTION_DELETE,
                     packageURI);
-            context.startActivity(uninstallIntent);
+            getContext.startActivity(uninstallIntent);
         }
     }
 
@@ -592,21 +591,21 @@ public class TDevice {
     public static void copyTextToBoard(String string) {
         if (TextUtils.isEmpty(string))
             return;
-        ClipboardManager clip = (ClipboardManager) BaseApplication.context()
+        ClipboardManager clip = (ClipboardManager) BaseApplication.getContext()
                 .getSystemService(Context.CLIPBOARD_SERVICE);
         clip.setText(string);
-        AppControler.showToast("复制成功");
+        BaseApplication.showToast("复制成功");
     }
 
     /**
      * 发送邮件
      *
-     * @param context
-     * @param subject 主题
-     * @param content 内容
-     * @param emails  邮件地址
+     * @param getContext
+     * @param subject    主题
+     * @param content    内容
+     * @param emails     邮件地址
      */
-    public static void sendEmail(Context context, String subject,
+    public static void sendEmail(Context getContext, String subject,
                                  String content, String... emails) {
         try {
             Intent intent = new Intent(Intent.ACTION_SEND);
@@ -616,7 +615,7 @@ public class TDevice {
             intent.putExtra(Intent.EXTRA_EMAIL, emails);
             intent.putExtra(Intent.EXTRA_SUBJECT, subject);
             intent.putExtra(Intent.EXTRA_TEXT, content);
-            context.startActivity(intent);
+            getContext.startActivity(intent);
         } catch (ActivityNotFoundException e) {
             e.printStackTrace();
         }
@@ -632,7 +631,7 @@ public class TDevice {
             obj = c.newInstance();
             field = c.getField("status_bar_height");
             x = Integer.parseInt(field.get(obj).toString());
-            sbar = BaseApplication.context().getResources()
+            sbar = BaseApplication.getContext().getResources()
                     .getDimensionPixelSize(x);
 
         } catch (Exception e1) {
@@ -641,19 +640,19 @@ public class TDevice {
         return sbar;
     }
 
-    public static int getActionBarHeight(Context context) {
+    public static int getActionBarHeight(Context getContext) {
         int actionBarHeight = 0;
         TypedValue tv = new TypedValue();
-        if (context.getTheme().resolveAttribute(android.R.attr.actionBarSize,
+        if (getContext.getTheme().resolveAttribute(android.R.attr.actionBarSize,
                 tv, true))
             actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data,
-                    context.getResources().getDisplayMetrics());
+                    getContext.getResources().getDisplayMetrics());
 
         if (actionBarHeight == 0
-                && context.getTheme().resolveAttribute(R.attr.actionBarSize,
+                && getContext.getTheme().resolveAttribute(R.attr.actionBarSize,
                 tv, true)) {
             actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data,
-                    context.getResources().getDisplayMetrics());
+                    getContext.getResources().getDisplayMetrics());
         }
 
         return actionBarHeight;
@@ -671,17 +670,17 @@ public class TDevice {
     /**
      * 调用系统安装了的应用分享
      *
-     * @param context
+     * @param getContext
      * @param title
      * @param url
      */
-    public static void showSystemShareOption(Activity context,
+    public static void showSystemShareOption(Activity getContext,
                                              final String title, final String url) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, "分享：" + title);
         intent.putExtra(Intent.EXTRA_TEXT, title + " " + url);
-        context.startActivity(Intent.createChooser(intent, "选择分享"));
+        getContext.startActivity(Intent.createChooser(intent, "选择分享"));
     }
 
     /**
@@ -691,7 +690,7 @@ public class TDevice {
      */
     public static int getNetworkType() {
         int netType = 0;
-        ConnectivityManager connectivityManager = (ConnectivityManager) AppControler
+        ConnectivityManager connectivityManager = (ConnectivityManager) BaseApplication
                 .getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         if (networkInfo == null) {

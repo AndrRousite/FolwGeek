@@ -18,6 +18,7 @@ import android.os.Message;
 import android.widget.RemoteViews;
 
 import com.iyiyo.mvc.R;
+import com.iyiyo.mvc.config.Properties;
 import com.iyiyo.mvc.interf.ICallbackResult;
 import com.iyiyo.mvc.utils.StringUtils;
 import com.iyiyo.mvc.utils.TDevice;
@@ -45,7 +46,7 @@ public class DownloadService extends Service {
 	
 	private String mTitle = "正在下载%s";
 
-	private String saveFileName = AppConfig.DEFAULT_SAVE_FILE_PATH;
+	private String saveFileName = Properties.DEFAULT_SAVE_FILE_PATH;
 
 	private ICallbackResult callback;
 
@@ -130,7 +131,7 @@ public class DownloadService extends Service {
 	 * 创建通知
 	 */
 	private void setUpNotification() {
-		int icon = R.drawable.ic_notification;
+		int icon = R.mipmap.ic_launcher;
 		CharSequence tickerText = "准备下载";
 		long when = System.currentTimeMillis();
 		mNotification = new Notification(icon, tickerText, when);
@@ -166,7 +167,7 @@ public class DownloadService extends Service {
 	private Runnable mdownApkRunnable = new Runnable() {
 		@Override
 		public void run() {
-			File file = new File(AppConfig.DEFAULT_SAVE_FILE_PATH);
+			File file = new File(Properties.DEFAULT_SAVE_FILE_PATH);
 			if (!file.exists()) {
 				file.mkdirs();
 			}

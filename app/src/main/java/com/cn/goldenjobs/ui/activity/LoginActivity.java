@@ -76,4 +76,29 @@ public class LoginActivity extends BaseHoldBackActivity<LoginPresenter> {
         }
         getPresenter().login(username,password);
     }
+
+    @Override
+    public int getResourceId() {
+        return 0;
+    }
+
+    @Override
+    public void initToolBar() {
+
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void onClick(int v) {
+
+    }
 }

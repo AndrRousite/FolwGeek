@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/pageerrLayout"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="?attr/layout_bg_normal" >
+    android:layout_height="fill_parent" >
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -43,7 +42,6 @@
                 android:lines="2"
                 android:gravity="center"
                 android:text="@string/error_view_loading"
-                android:textColor="?attr/infoTextColor"
                 android:textSize="@dimen/text_size_16" />
         </LinearLayout>
     </RelativeLayout>
