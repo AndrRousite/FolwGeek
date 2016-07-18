@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.iyiyo.mvc.R;
-import com.iyiyo.mvc.adapter.ViewPageFragmentAdapter;
+import com.iyiyo.mvc.adapter.viewpager.ViewPageFragmentAdapter;
 import com.iyiyo.mvc.ui.widget.empty.EmptyLayout;
 import com.iyiyo.mvc.ui.widget.viewpage.PagerSlidingTabStrip;
 

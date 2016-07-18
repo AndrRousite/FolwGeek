@@ -12,6 +12,8 @@ import com.cn.goldenjobs.dao.DaoMaster;
 import com.cn.goldenjobs.dao.DaoSession;
 import com.iyiyo.utils.SPUtils;
 
+import org.apache.http.NameValuePair;
+
 import java.util.Hashtable;
 
 /**
@@ -58,7 +60,6 @@ public final class AppControler{
 
         // 初始化数据库
         createSqliteDatabase();
-
     }
 
     private void createSqliteDatabase() {
