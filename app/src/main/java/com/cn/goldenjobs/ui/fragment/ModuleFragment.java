@@ -1,57 +1,53 @@
 package com.cn.goldenjobs.ui.fragment;
 
-import android.content.res.Configuration;
-import android.graphics.Point;
+
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Display;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.cn.goldenjobs.R;
-import com.cn.goldenjobs.bean.CityList;
-import com.cn.goldenjobs.bean.User;
-import com.cn.goldenjobs.httptask.APIStoreTask;
-import com.iyiyo.mvp.ui.fragment.BaseFragment;
-import com.iyiyo.uikit.cersamics.LazyScrollView;
-import com.iyiyo.uikit.cersamics.Rotate3dAnimation;
+import com.cn.goldenjobs.bean.City;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.iyiyo.mvc.ui.fragment.BaseFragment;
+import com.iyiyo.uikit.quicksidebar.QuickSideBarTipsView;
+import com.iyiyo.uikit.quicksidebar.QuickSideBarView;
+import com.iyiyo.uikit.quicksidebar.listener.OnQuickSideBarTouchListener;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * 瓷片布局的Module界面
  * Created by liu-feng on 2016/7/15.
  * 邮箱:w710989327@foxmail.com
  */
-public class ModuleFragment extends BaseFragment implements LazyScrollView.OnScrollListener {
-    @Bind(R.id.rootView)
-    RelativeLayout rootView;
-    @Bind(R.id.rootScroll)
-    LazyScrollView rootScroll;
+public class ModuleFragment extends BaseFragment implements OnQuickSideBarTouchListener {
 
-    private int rowCountPerScreen = 3;  // 行数
-    private int cols = 4;// 当前总列数
-    private static final int COLUMNCOUNT = 4;
-    private int columnWidth = 250;// 每个item的宽度
-    private int itemHeight = 0;  // 每个Item的高度
+    @Bind(R.id.recyclerView)
+    RecyclerView recyclerView;
+    @Bind(R.id.quickSideBarTipsView)
+    QuickSideBarTipsView quickSideBarTipsView;
+    @Bind(R.id.quickSideBarView)
+    QuickSideBarView quickSideBarView;
 
-    private ArrayList<Integer> colYs = new ArrayList<Integer>();
-    private ArrayList<View> Views = new ArrayList<View>();
-    List<Point> lostPoint = new ArrayList<Point>();// 用于记录空白块的位置
-    private LayoutInflater mInflater;
+    private String response;
+    HashMap<String, Integer> letters = new HashMap<>();
+    CityListAdapter adapter;
 
     @Override
     public int getResourceId() {
@@ -60,48 +56,68 @@ public class ModuleFragment extends BaseFragment implements LazyScrollView.OnScr
 
     @Override
     public void initView(View view) {
-        rootView.setPersistentDrawingCache(ViewGroup.PERSISTENT_ANIMATION_CACHE);
-        rootScroll.setOnScrollListener(this);
-        rootScroll.getView();
-        mInflater = mContext.getLayoutInflater();
-        Display display = mContext.getWindowManager().getDefaultDisplay();
-        int width = display.getWidth();
-        int height = display.getHeight();
-        Configuration cf = this.getResources().getConfiguration();
-        if (cf.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            rowCountPerScreen = 3;
-        } else {
-            rowCountPerScreen = 6;
-        }
-        columnWidth = width / COLUMNCOUNT;
-        itemHeight = height / rowCountPerScreen;
-        for (int i = 0; i < 4; i++) {
-            colYs.add(0);
-        }
-    }
+        //设置监听
+        quickSideBarView.setOnQuickSideBarTouchListener(this);
+        //设置列表数据和浮动header
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new CityListAdapter() {
+            @Override
+            public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(android.R.layout.simple_list_item_1, parent, false);
+                return new RecyclerView.ViewHolder(view) {
+                };
+            }
 
-    private synchronized void addView(View view, String uri) {
-        placeBrick(view);
-        ImageView picView = (ImageView) view.findViewById(R.id.imageView);
-        TextView textView = (TextView) view.findViewById(R.id.textView);
-        rootView.addView(view);
-        startAnim(view);
-        textView.setText(uri);
-        Glide.with(this).load(uri).error(R.mipmap.logo).into(picView);
-    }
-
-    private void startAnim(View v) {
-        final float centerX = columnWidth / 2.0f;
-        final float centerY = itemHeight / 2.0f;
-        Rotate3dAnimation rotation = new Rotate3dAnimation(10, 0, centerX, centerY);
-        rotation.setDuration(1000);
-        rotation.setFillAfter(true);
-        rotation.setInterpolator(new DecelerateInterpolator());
-        v.startAnimation(rotation);
+            @Override
+            public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+                TextView textView = (TextView) holder.itemView;
+                textView.setText(getItem(position).getCityName());
+            }
+        };
     }
 
     @Override
     public void initData() {
+        try {
+            InputStream is = mContext.getAssets().open("city_list");
+            int ch = 0;
+            ByteArrayOutputStream out = new ByteArrayOutputStream(); //实现了一个输出流
+            while ((ch = is.read()) != -1) {
+                out.write(ch); //将指定的字节写入此 byte 数组输出流
+            }
+            byte[] buff = out.toByteArray();//以 byte 数组的形式返回此输出流的当前内容
+            out.close(); //关闭流
+            is.close(); //关闭流
+            response = new String(buff, "UTF-8"); //设置字符串编码
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (response != null) {
+            //GSON解释出来
+            Type listType = new TypeToken<LinkedList<City>>() {
+            }.getType();
+            Gson gson = new Gson();
+            LinkedList<City> cities = gson.fromJson(response, listType);
+            ArrayList<String> customLetters = new ArrayList<>();
+
+            int position = 0;
+            for (City city : cities) {
+                String letter = city.getFirstLetter();
+                //如果没有这个key则加入并把位置也加入
+                if (!letters.containsKey(letter)) {
+                    letters.put(letter, position);
+                    customLetters.add(letter);
+                }
+                position++;
+            }
+
+            //不自定义则默认26个字母
+            quickSideBarView.setLetters(customLetters);
+            adapter.addAll(cities);
+            recyclerView.setAdapter(adapter);
+        }
     }
 
     @Override
@@ -110,147 +126,71 @@ public class ModuleFragment extends BaseFragment implements LazyScrollView.OnScr
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onLetterChanged(String letter, int position, float y) {
+        quickSideBarTipsView.setText(letter, position, y);
+        //有此key则获取位置并滚动到该位置
+        if (letters.containsKey(letter)) {
+            recyclerView.scrollToPosition(letters.get(letter));
+        }
     }
 
     @Override
-    public void onBottom() {
-
+    public void onLetterTouching(boolean touching) {
+//可以自己加入动画效果渐显渐隐
+        quickSideBarTipsView.setVisibility(touching ? View.VISIBLE : View.INVISIBLE);
     }
 
-    @Override
-    public void onAutoScroll(int l, int t, int oldl, int oldt) {
+    private abstract class CityListAdapter<VH extends RecyclerView.ViewHolder>
+            extends RecyclerView.Adapter<VH> {
+        private ArrayList<City> items = new ArrayList<City>();
 
-    }
+        public CityListAdapter() {
+            setHasStableIds(true);
+        }
 
-    /**
-     * 当加载完成, 供presenter调用
-     *
-     * @param result
-     */
-    public void onLoadFinished(CityList.RetData result) {
-        if (result.getCitylist() != null) {
-            Random r = new Random();
-            for (int i = 0; i < result.getCitylist().size(); i++) {
-                View v = mInflater.inflate(R.layout.item_text_image_view, null);
-                int nextInt = r.nextInt(50);
-                // 模拟分为三种情况
-                if (nextInt > 40) {
-                    // 跨两列两行
-                    android.widget.RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                            columnWidth * 2, itemHeight * 2);
-                    v.setLayoutParams(params);
-                } else if (nextInt > 30) {
-                    // 跨一列两行
-                    android.widget.RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                            columnWidth, itemHeight * 2);
+        public void add(City object) {
+            items.add(object);
+            notifyDataSetChanged();
+        }
 
-                    v.setLayoutParams(params);
-                } else if (nextInt > 25) {
-                    // 跨两列一行
-                    android.widget.RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                            columnWidth * 2, itemHeight);
+        public void add(int index, City object) {
+            items.add(index, object);
+            notifyDataSetChanged();
+        }
 
-                    v.setLayoutParams(params);
-                } else {
-                    android.widget.RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                            columnWidth, itemHeight);
-
-                    v.setLayoutParams(params);
-                }
-                addView(v, result.getCitylist().get(i));
+        public void addAll(Collection<? extends City> collection) {
+            if (collection != null) {
+                items.addAll(collection);
+                notifyDataSetChanged();
             }
         }
-    }
 
-    /**
-     * 当加载失败, 供presenter调用
-     *
-     * @param error
-     */
-    public void onLoadFailure(Throwable error) {
-        showToast(error != null ? error.getMessage() : "网络异常");
-    }
-
-    /**
-     * 当加载中, 显示dialog
-     */
-    public void onLoading() {
-
-    }
-
-    // 布局算法
-
-    /**
-     * 原理：动态规划
-     *
-     * @param view
-     */
-    private void placeBrick(View view) {
-        LayoutParams brick = (LayoutParams) view.getLayoutParams();
-        int groupCount, colSpan, rowSpan;
-        List<Integer> groupY = new ArrayList<Integer>();
-        List<Integer> groupColY = new ArrayList<Integer>();
-        colSpan = (int) Math.ceil(brick.width / this.columnWidth);// 计算跨几列
-        colSpan = Math.min(colSpan, this.cols);// 取最小的列数
-        rowSpan = (int) Math.ceil(brick.height / this.itemHeight);
-        Log.d("VideoShowActivity", "colSpan:" + colSpan);
-        if (colSpan == 1) {
-            groupY = this.colYs;
-            // 如果存在白块则从添加到白块中
-            if (lostPoint.size() > 0 && rowSpan == 1) {
-                Point point = lostPoint.get(0);
-                int pTop = point.y;
-                int pLeft = this.columnWidth * point.x;// 放置的left
-                android.widget.RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                        brick.width, brick.height);
-                params.leftMargin = pLeft;
-                params.topMargin = pTop;
-                view.setLayoutParams(params);
-                lostPoint.remove(0);
-                return;
-            }
-
-        } else {// 说明有跨列
-            groupCount = this.cols + 1 - colSpan;// 添加item的时候列可以填充的列index
-            for (int j = 0; j < groupCount; j++) {
-                groupColY = this.colYs.subList(j, j + colSpan);
-                groupY.add(j, Collections.max(groupColY));// 选择几个可添加的位置
-            }
+        public void addAll(City... items) {
+            addAll(Arrays.asList(items));
         }
-        int minimumY;
 
-        minimumY = Collections.min(groupY);// 取出几个可选位置中最小的添加
-        int shortCol = 0;
-        int len = groupY.size();
-        for (int i = 0; i < len; i++) {
-            if (groupY.get(i) == minimumY) {
-                shortCol = i;// 获取到最小y值对应的列值
-                break;
-            }
+        public void clear() {
+            items.clear();
+            notifyDataSetChanged();
         }
-        int pTop = minimumY;// 这是放置的Top
-        int pLeft = this.columnWidth * shortCol;// 放置的left
-        android.widget.RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                brick.width, brick.height);
-        params.leftMargin = pLeft;
-        params.topMargin = pTop;
-        view.setLayoutParams(params);
-        if (colSpan != 1) {
-            for (int i = 0; i < this.cols; i++) {
-                if (minimumY > this.colYs.get(i)) {// 出现空行
-                    int y = minimumY - this.colYs.get(i);
-                    for (int j = 0; j < y / itemHeight; j++) {
-                        lostPoint.add(new Point(i, this.colYs.get(i)
-                                + itemHeight * j));
-                    }
-                }
-            }
+
+        public void remove(String object) {
+            items.remove(object);
+            notifyDataSetChanged();
         }
-        int setHeight = minimumY + brick.height, setSpan = this.cols + 1 - len;
-        for (int i = 0; i < setSpan; i++) {
-            this.colYs.set(shortCol + i, setHeight);
+
+        public City getItem(int position) {
+            return items.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return getItem(position).hashCode();
+        }
+
+        @Override
+        public int getItemCount() {
+            return items.size();
         }
     }
 }
