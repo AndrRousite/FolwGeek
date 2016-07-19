@@ -2,7 +2,6 @@ package com.cn.goldenjobs.ui.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
@@ -30,24 +29,26 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     DrawerLayout layoutDrawer;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        initView();
+    public int getResourceId() {
+        return R.layout.activity_main;
     }
 
-    private void initView() {
+    @Override
+    public void initToolBar() {
+        toolbar.setTitle("");
+        toolbar.setSubtitle(getResources().getString(R.string.app_name));
+
+        setSupportActionBar(toolbar);
+    }
+
+    @Override
+    public void initView() {
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            getWindow().setStatusBarColor(getResources().getColor(R.color.transparent));
 //        }
 
         layoutDrawer.setScrimColor(Color.TRANSPARENT);  // 设置DrawerLayout背景色
         navView.getChildAt(0).setVerticalScrollBarEnabled(false);  // 去掉侧边栏的滚动条
-
-        toolbar.setTitle("");
-        toolbar.setSubtitle(getResources().getString(R.string.app_name));
-
-        setSupportActionBar(toolbar);
 
         navView.setItemIconTintList(null);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,layoutDrawer,toolbar,R.string.open,R.string.close);
@@ -58,6 +59,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         
         setDefaultMenuItem();
 
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void onClick(int v) {
     }
 
     private void setDefaultMenuItem() {

@@ -24,7 +24,6 @@ import com.iyiyo.uikit.BottomFragmentTabHost;
 import com.iyiyo.utils.SPUtils;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -58,20 +57,23 @@ public class HomeActivity extends BaseActivity implements
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        initView();
+    public int getResourceId() {
+        return R.layout.activity_home;
+    }
+
+    @Override
+    public void initToolBar() {
+        toolbar.setTitle("");
+        toolbar.setSubtitle("Home");
+        toolbar.setLogo(R.mipmap.ic_home);
+        setSupportActionBar(toolbar);
     }
 
     /**
      * *****************************************
      */
-    private void initView() {
-        toolbar.setTitle("");
-        toolbar.setSubtitle("Home");
-        toolbar.setLogo(R.mipmap.ic_home);
-        setSupportActionBar(toolbar);
+    @Override
+    public void initView() {
         tabhost.setup(this, getSupportFragmentManager(), R.id.layout_frame);
         if (Build.VERSION.SDK_INT > 10) {
             tabhost.getTabWidget().setShowDividers(0);
@@ -79,6 +81,17 @@ public class HomeActivity extends BaseActivity implements
         initTabs();
         tabhost.setCurrentTab(0);
         tabhost.setOnTabChangedListener(this);
+    }
+
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void onClick(int v) {
+
     }
 
     /**
@@ -189,4 +202,5 @@ public class HomeActivity extends BaseActivity implements
         }
         super.onBackPressed();
     }
+
 }

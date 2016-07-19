@@ -18,6 +18,28 @@ public class ExampleFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = new View(getActivity());
+        initView(view);
+        initData();
         return view;
+    }
+
+    @Override
+    public int getResourceId() {
+        return 0;
+    }
+
+    @Override
+    public void initView(View view) {
+
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void onClick(int v) {
+
     }
 }

@@ -1,8 +1,7 @@
 package com.cn.goldenjobs.ui.activity.tabhost;
 
+import com.cn.goldenjobs.R;
 import com.cn.goldenjobs.ui.fragment.ExampleFragment;
-import com.iyiyo.mvp.ui.fragment.BaseFragment;
-import com.iyiyo.utils.R;
 
 /**
  * 地步导航条的Item
