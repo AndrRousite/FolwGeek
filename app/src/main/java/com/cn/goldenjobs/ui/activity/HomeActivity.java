@@ -55,7 +55,6 @@ public class HomeActivity extends BaseActivity implements
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.table_iv:  // TabHost中间的按钮
-                tableIv.setSelected(true);
                 break;
         }
     }
@@ -207,10 +206,4 @@ public class HomeActivity extends BaseActivity implements
         super.onBackPressed();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }
