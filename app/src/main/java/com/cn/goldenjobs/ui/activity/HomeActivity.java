@@ -24,6 +24,7 @@ import com.iyiyo.uikit.BottomFragmentTabHost;
 import com.iyiyo.utils.SPUtils;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -45,6 +46,8 @@ public class HomeActivity extends BaseActivity implements
     FrameLayout layoutFrame;
     @Bind(android.R.id.tabhost)
     BottomFragmentTabHost tabhost;
+    @Bind(R.id.table_iv)
+    ImageView tableIv;
 
     private long mBackPressedTime;
 
@@ -52,6 +55,7 @@ public class HomeActivity extends BaseActivity implements
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.table_iv:  // TabHost中间的按钮
+                tableIv.setSelected(true);
                 break;
         }
     }
@@ -203,4 +207,10 @@ public class HomeActivity extends BaseActivity implements
         super.onBackPressed();
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }
