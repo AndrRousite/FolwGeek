@@ -58,6 +58,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
             ViewGroup parent = (ViewGroup) mRoot.getParent();
             if (parent != null)
                 parent.removeView(mRoot);
+            ButterKnife.bind(this, mRoot);
         } else {
             mRoot = inflater.inflate(getResourceId(), container, false);
             ButterKnife.bind(this, mRoot);
