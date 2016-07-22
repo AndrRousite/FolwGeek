@@ -12,7 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.cn.goldenjobs.R;
-import com.iyiyo.mvp.ui.activity.BaseActivity;
+import com.iyiyo.mvc.ui.activity.BaseActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

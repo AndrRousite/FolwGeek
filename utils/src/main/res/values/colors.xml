@@ -20,6 +20,7 @@
     <color name="main_title_color">#383838</color>
     <color name="main_desc_color">#969696</color>
     <color name="main_sub_color">#ababab</color>
+    <color name="main_hint_color">#eeeeee</color>
     <color name="main_division_color">#d7d7d7</color>
     <color name="main_background_color">#f0f0f0</color>
 

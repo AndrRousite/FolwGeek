@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/drawer_header_background">
+    android:background="#339933">
 
     <RelativeLayout
         android:padding="@dimen/space_10"
@@ -37,7 +37,7 @@
         android:layout_marginTop="10dp"
         android:textSize="@dimen/text_size_14"
         android:drawablePadding="5dp"
-        android:textColor="?attr/drawer_header_username"/>
+        android:textColor="@color/white"/>
 
     <!--懒, 不想配置-->
     <TextView

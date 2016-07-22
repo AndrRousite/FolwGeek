@@ -1,14 +1,11 @@
 package com.cn.goldenjobs.httptask;
 
 import android.content.SharedPreferences;
-import android.util.Log;
 
-import com.cn.goldenjobs.AppControler;
 import com.cn.goldenjobs.JFWApplication;
-import com.cn.goldenjobs.bean.RespUser;
 import com.cn.goldenjobs.config.APIConfig;
-import com.iyiyo.mvp.model.SharePreferenceManager;
-import com.iyiyo.mvp.model.SharePreferenceManager.LocalUser;
+import com.cn.goldenjobs.config.JFWConstans;
+import com.iyiyo.utils.SPUtils;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -71,8 +68,8 @@ public class API {
 
     private static String getCookies() {
         if (cookies == null) {
-            SharedPreferences preferences = SharePreferenceManager.getLocalUser(JFWApplication.getInstance());
-            return cookies = preferences.getString(LocalUser.KEY_COOKIES, "");
+            cookies = (String) SPUtils.get(JFWApplication.getInstance(), JFWConstans.KEY_COOKIES, "");
+            return cookies;
         }
         return cookies;
     }
@@ -96,12 +93,6 @@ public class API {
      */
     public interface JFWAPI {
 
-        /**
-         * 登录
-         */
-        @POST("/action/api/login_validate")
-        Observable<RespUser> login(@Query("username") String username,
-                                   @Query("pwd") String password,
-                                   @Query("keep_login") int keep_login);
+
     }
 }

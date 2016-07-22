@@ -1,13 +1,14 @@
 package com.cn.goldenjobs.bean;
 
-import com.iyiyo.mvp.domain.Entity;
+
+import com.iyiyo.mvc.bean.Entity;
 
 /**
  * 用户信息
  * Created by liu-feng on 2016/6/21.
  * 邮箱:w710989327@foxmail.com
  */
-public class User extends Entity{
+public class User extends Entity {
 
     // TODO
     private long uid;

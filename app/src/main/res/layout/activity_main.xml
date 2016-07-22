@@ -45,11 +45,11 @@
         android:layout_width="@dimen/drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="?attr/drawer_container_background"
+        android:background="@color/white"
         app:headerLayout="@layout/layout_header_drawer"
-        app:itemBackground="?attr/drawer_container_menu"
+        app:itemBackground="@drawable/selector_item_list_tranlast"
         app:itemIconTint="@color/transparent"
-        app:itemTextColor="?attr/drawer_container_menu_text"
+        app:itemTextColor="@color/white"
         app:menu="@menu/nav_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

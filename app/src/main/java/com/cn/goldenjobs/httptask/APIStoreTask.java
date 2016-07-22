@@ -1,14 +1,10 @@
 package com.cn.goldenjobs.httptask;
 
 import android.content.SharedPreferences;
-import android.media.Image;
 
 import com.cn.goldenjobs.JFWApplication;
-import com.cn.goldenjobs.bean.CityList;
-import com.cn.goldenjobs.bean.ImageUrlList;
-import com.cn.goldenjobs.config.APIConfig;
-import com.iyiyo.mvp.model.SharePreferenceManager;
-import com.iyiyo.mvp.model.SharePreferenceManager.LocalUser;
+import com.cn.goldenjobs.config.JFWConstans;
+import com.iyiyo.utils.SPUtils;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -25,7 +21,6 @@ import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
 import retrofit.SimpleXmlConverterFactory;
 import retrofit.http.GET;
-import retrofit.http.Query;
 import rx.Observable;
 
 /**
@@ -67,8 +62,8 @@ public class APIStoreTask {
 
     private static String getCookies() {
         if (cookies == null) {
-            SharedPreferences preferences = SharePreferenceManager.getLocalUser(JFWApplication.getInstance());
-            return cookies = preferences.getString(LocalUser.KEY_COOKIES, "");
+            cookies = (String) SPUtils.get(JFWApplication.getInstance(), JFWConstans.KEY_COOKIES, "");
+            return cookies;
         }
         return cookies;
     }
@@ -92,14 +87,6 @@ public class APIStoreTask {
      * 百度APIstore接口
      */
     public interface API {
-
-        // 空气指数支持的城市列表
-        @GET("/aqiservice/citylist")
-        Observable<CityList> getCityList();
-
-        // 笑话大全趣图
-        @GET("/docs/64")
-        Observable<ImageUrlList> getImageList();
 
     }
 }

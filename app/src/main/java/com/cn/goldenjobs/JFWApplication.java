@@ -1,15 +1,17 @@
 package com.cn.goldenjobs;
 
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Process;
 
 import com.cn.goldenjobs.bean.User;
-import com.iyiyo.mvp.BaseApplication;
+import com.iyiyo.mvc.app.BaseApplication;
 
 /**
- * Created by liu-feng on 2016/6/21.
- * 邮箱:w710989327@foxmail.com
+ * Created by
+ * liu-feng on
+ * 2016/6/21.
+ * 邮箱:w710989327
+ *
+ * @foxmail.com
  */
 public class JFWApplication extends BaseApplication {
 
@@ -27,22 +29,15 @@ public class JFWApplication extends BaseApplication {
 
     /**
      * 是否已经登陆
+     *
      * @return
      */
-    public static boolean isLogined(){
+    public static boolean isLogined() {
         return LOCAL_LOGINED_USER != null;
     }
 
     public static void setLocalLoginedUser(User localLoginedUser) {
         LOCAL_LOGINED_USER = localLoginedUser;
-    }
-
-    public static PackageInfo getPackageInfo(){
-        try {
-            return mApplication.getPackageManager().getPackageInfo(mApplication.getPackageName(), 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     /**

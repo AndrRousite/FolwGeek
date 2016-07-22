@@ -19,6 +19,10 @@ public class SPUtils {
      */
     public static final String FILE_NAME = "share_data";
 
+    public static SharedPreferences getSharedPrefences(Context context){
+        return context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+    }
+
     /**
      * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
      * 

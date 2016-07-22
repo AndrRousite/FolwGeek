@@ -21,6 +21,7 @@ import com.iyiyo.mvc.config.Properties;
 import com.iyiyo.mvc.utils.StringUtils;
 import com.iyiyo.utils.SPUtils;
 
+import java.util.Hashtable;
 import java.util.UUID;
 
 /**
@@ -39,12 +40,15 @@ public class BaseApplication extends Application {
     private static long lastToastTime;
     private static String LAST_REFRESH_TIME = "last_refresh_time.pref";
     private static String Read_Post_List = "read_post_list.pref";
+    // 应用全局变量存储在这里
+    protected static Hashtable<String, Object> mAppParamsHolder;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
         _context = getApplicationContext();
+        mAppParamsHolder = new Hashtable<String, Object>();
     }
 
     /**
@@ -206,4 +210,35 @@ public class BaseApplication extends Application {
         return _context.getSharedPreferences(prefName,
                 Context.MODE_MULTI_PROCESS);
     }
+
+    /**
+     * 存储全局数据
+     *
+     * @param key
+     * @param value
+     */
+    public static void putValue(String key, Object value) {
+        mAppParamsHolder.put(key, value);
+    }
+
+    /**
+     * 获取全局数据
+     *
+     * @param key
+     * @return
+     */
+    public static Object getValue(String key) {
+        return mAppParamsHolder.get(key);
+    }
+
+    /**
+     * 是否已存放
+     *
+     * @param key
+     * @return
+     */
+    public static boolean containsKey(String key) {
+        return mAppParamsHolder.containsKey(key);
+    }
+
 }

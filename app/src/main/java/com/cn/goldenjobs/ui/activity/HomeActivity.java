@@ -19,7 +19,7 @@ import com.cn.goldenjobs.R;
 import com.cn.goldenjobs.config.JFWConstans;
 import com.cn.goldenjobs.interf.OnTabReselectListener;
 import com.cn.goldenjobs.ui.activity.tabhost.Table;
-import com.iyiyo.mvp.ui.activity.BaseActivity;
+import com.iyiyo.mvc.ui.activity.BaseActivity;
 import com.iyiyo.uikit.BottomFragmentTabHost;
 import com.iyiyo.utils.SPUtils;
 

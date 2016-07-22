@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.iyiyo.mvp.ui.fragment.BaseFragment;
+import com.iyiyo.mvc.ui.fragment.BaseFragment;
 
 /**
  * Created by liu-feng on 2016/7/14.

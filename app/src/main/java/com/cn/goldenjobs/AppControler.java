@@ -4,15 +4,12 @@ package com.cn.goldenjobs;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.cn.goldenjobs.bean.User;
 import com.cn.goldenjobs.dao.DaoMaster;
 import com.cn.goldenjobs.dao.DaoSession;
 import com.iyiyo.utils.SPUtils;
-
-import org.apache.http.NameValuePair;
 
 import java.util.Hashtable;
 
@@ -22,7 +19,7 @@ import java.util.Hashtable;
  * @author chenys
  * @since 2013-8-7 下午5:22:39
  */
-public final class AppControler{
+public final class AppControler {
 
     // 用户数据
     public static User LOACL_LOGINED_USER;
@@ -70,7 +67,7 @@ public final class AppControler{
     /**
      * 获取数据Session，用于操作数据库
      */
-    public DaoSession getDaoSession(){
+    public DaoSession getDaoSession() {
         if (db == null)
             new Throwable(new Exception("数据库未初始化"));
         DaoMaster master = new DaoMaster(db);
@@ -82,12 +79,12 @@ public final class AppControler{
      */
     public void exit() {
         try {
-             //使用时长统计
-             long launchTime = (long) JFWApplication.getInstance().getValue("launchTime");
-             if (launchTime > 0) {
-             long userDuration = System.currentTimeMillis() - launchTime;
-                 SPUtils.put(JFWApplication.getInstance(),"launchTime",launchTime);
-             }
+            //使用时长统计
+            long launchTime = (long) JFWApplication.getInstance().getValue("launchTime");
+            if (launchTime > 0) {
+                long userDuration = System.currentTimeMillis() - launchTime;
+                SPUtils.put(JFWApplication.getInstance(), "launchTime", launchTime);
+            }
             // 取消所有通知
             mNotificationManager.cancelAll();
             mNotifications.clear();
@@ -98,7 +95,7 @@ public final class AppControler{
         }
     }
 
-    public boolean isLogin(){
+    public boolean isLogin() {
         return LOACL_LOGINED_USER != null;
     }
 }
