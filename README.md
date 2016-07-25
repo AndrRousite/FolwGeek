@@ -43,4 +43,5 @@ Presenter
 
 * [MVP入坑文](https://github.com/bboyfeiyu/android-tech-frontier/blob/master/issue-12%2FAndroid%E4%B8%8AMVP%E7%9A%84%E4%BB%8B%E7%BB%8D.md#使用mvp)
 ####Feture
-  ......
+- 引入IM云信SDK（IM基础）
+
