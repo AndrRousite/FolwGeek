@@ -18,6 +18,8 @@ public class LoginActivity extends BaseHoldBackActivity {
     TextInputLayout etPassword;
     @Bind(R.id.btn_submit)
     Button btnSubmit;
+    @Bind(R.id.btn_register)
+    Button btnRegister;
 
     @Override
     public int getResourceId() {
@@ -27,7 +29,11 @@ public class LoginActivity extends BaseHoldBackActivity {
     @Override
     public void initToolBar() {
         super.initToolBar();
+        mToolbar.setTitle(null);
         mToolbar.setSubtitle("登录");
+        if (getIntent() != null && getIntent().hasExtra("fromSplash")){
+            mToolbar.setNavigationIcon(null);
+        }
     }
 
     @Override
@@ -38,6 +44,7 @@ public class LoginActivity extends BaseHoldBackActivity {
     @Override
     public void initData() {
         btnSubmit.setOnClickListener(this);
+        btnRegister.setOnClickListener(this);
     }
 
     @Override
@@ -51,6 +58,9 @@ public class LoginActivity extends BaseHoldBackActivity {
                 return;
             }
             finish();
+        }else if (v == R.id.btn_register){
+            // 注册
+            showToast("注册成功...TODO",0,0);
         }
     }
 }

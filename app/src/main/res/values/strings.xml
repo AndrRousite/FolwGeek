@@ -4,6 +4,7 @@
     <string name="login">登录</string>
     <string name="account">手机号/邮箱</string>
     <string name="password">密码</string>
+    <string name="register">还没有账号？马上注册</string>
 
     <string name="news">资讯</string>
     <string name="change_theme">改变主题</string>

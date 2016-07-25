@@ -30,10 +30,10 @@ public class SplashActivity extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (!AppControler.getInstance().isLogin()) {
+                if (AppControler.getInstance().isLogin()) {
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 }else{
-                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                    startActivity(new Intent(SplashActivity.this, LoginActivity.class).putExtra("fromSplash",true));
                 }
                 finish();
             }
