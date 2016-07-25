@@ -54,7 +54,7 @@ public class LoginActivity extends BaseHoldBackActivity {
             String username = etUsername.getEditText().getText().toString();
             String password = etPassword.getEditText().getText().toString();
             if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)){
-                Toast.makeText(this, "账号/密码不能为空", Toast.LENGTH_SHORT).show();
+                showToast("账号/密码不能为空",0,0);
                 return;
             }
             finish();
