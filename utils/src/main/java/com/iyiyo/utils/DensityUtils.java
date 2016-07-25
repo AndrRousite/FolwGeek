@@ -1,7 +1,9 @@
 package com.iyiyo.utils;
 
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.WindowManager;
 
 /**
  * 
@@ -74,6 +76,34 @@ public class DensityUtils {
 	 */
 	public static float px2sp(Context context, float pxVal) {
 		return (pxVal / context.getResources().getDisplayMetrics().scaledDensity);
+	}
+
+	/**
+	 * widthPx
+	 *
+	 * @param context
+	 * @param context
+	 * @return
+	 */
+	public static int getScreenWidth(Context context) {
+		DisplayMetrics dm = new DisplayMetrics();
+		//获取屏幕信息
+		((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(dm);
+		return dm.widthPixels;
+	}
+
+	/**
+	 * heightPx
+	 *
+	 * @param context
+	 * @param context
+	 * @return
+	 */
+	public static int getScreenHeight(Context context) {
+		DisplayMetrics dm = new DisplayMetrics();
+		//获取屏幕信息
+		((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(dm);
+		return dm.heightPixels;
 	}
 
 }
