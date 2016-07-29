@@ -10,7 +10,6 @@
     -->
     <dimen name="navigation_drawer_width">240dp</dimen>
 
-    <!-- OSChina APP -->
     <dimen name="text_size_32">32.0dip</dimen>
     <dimen name="text_size_31">31.0dip</dimen>
     <dimen name="text_size_30">30.0dip</dimen>
@@ -38,6 +37,7 @@
     <dimen name="text_size_8">8.0dip</dimen>
     <dimen name="text_size_7">7.0dip</dimen>
     <dimen name="space_100">100.0dip</dimen>
+    <dimen name="space_72">72.0dip</dimen>
     <dimen name="space_60">60dp</dimen>
     <dimen name="space_49">49dip</dimen>
     <dimen name="space_35">35.0dip</dimen>
