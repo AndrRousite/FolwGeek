@@ -104,12 +104,12 @@ public class PhotoViewActivity extends BaseActivity {
                     String filePath = Properties.DEFAULT_SAVE_IMAGE_PATH
                             + getFileName(mImageUrl);
                     Core.getKJBitmap().saveImage(PhotoViewActivity.this, mImageUrl, filePath);
-                    showToast(getResources().getString(R.string.tip_save_image_suc));
+                    showToast(getResources().getString(R.string.tip_save_image_suc),0,0);
                 } else if (menuItem.getId() == R.id.menu2) {
                     //  不做
                 } else if (menuItem.getId() == R.id.menu3) {
                     TDevice.copyTextToBoard(mImageUrl);
-                    showToast("已复制到剪贴板");
+                    showToast("已复制到剪贴板",0,0);
                 }
                 dialog.dismiss();
             }

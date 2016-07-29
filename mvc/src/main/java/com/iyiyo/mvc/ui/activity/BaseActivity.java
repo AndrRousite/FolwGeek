@@ -91,9 +91,9 @@ public abstract class BaseActivity extends AppCompatActivity implements
         toast.show();
     }
 
-    public void showToast(String text) {
-        new Handler().obtainMessage(0x1001,text).sendToTarget();
-    }
+//    //public void showToast(String text) {
+//        new Handler().obtainMessage(0x1001,text).sendToTarget();
+//    }
 
     @Override
     public ProgressDialog showWaitDialog() {

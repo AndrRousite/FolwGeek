@@ -202,7 +202,7 @@ public class HomeActivity extends BaseActivity implements
                 finish();
             } else {
                 mBackPressedTime = curTime;
-                showToast("再按一次退出App");
+                showToast("再按一次退出App",0,0);
             }
         }
         super.onBackPressed();

@@ -82,9 +82,9 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         mBundle = null;
     }
 
-    public void showToast(String text) {
-        new Handler().obtainMessage(0x1001,text).sendToTarget();
-    }
+//    //public void showToast(String text) {
+//        new Handler().obtainMessage(0x1001,text).sendToTarget();
+//    }
 
     public void showToast(String message, int icon, int gravity) {
         CommonToast toast = new CommonToast(mContext);

@@ -306,7 +306,7 @@ public abstract class BaseListFragment<T extends Entity> extends BaseFragment
         }
 
         if (mResult != null && !mResult.OK()) {
-            showToast(mResult.getErrorMessage());
+            showToast(mResult.getErrorMessage(),0,0);
             // 注销登陆，密码已经修改，cookie，失效了
         }
 

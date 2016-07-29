@@ -161,13 +161,13 @@ public final class CaptureActivity extends BaseActivity implements
         if (perms != null && perms.size() == 2) {
             initCamera();
         }else{
-            showToast(getResources().getString(R.string.permissions_camera_error));
+            showToast(getResources().getString(R.string.permissions_camera_error),0,0);
         }
     }
 
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
-        showToast(getResources().getString(R.string.permissions_camera_error));
+        showToast(getResources().getString(R.string.permissions_camera_error),0,0);
     }
 
     @Override
@@ -237,7 +237,7 @@ public final class CaptureActivity extends BaseActivity implements
             initCrop();
         } catch (IOException | RuntimeException e) {
             L.i(TAG, "Unexpected error initializing camera");
-            showToast(getResources().getString(R.string.permissions_camera_error));
+            showToast(getResources().getString(R.string.permissions_camera_error),0,0);
         }
     }
 
@@ -314,7 +314,7 @@ public final class CaptureActivity extends BaseActivity implements
             @Override
             public void run() {
                 //handleText(rawResult.getText()); TODO
-                showToast(rawResult.getText());
+                showToast(rawResult.getText(),0,0);
             }
         }, 800);
     }
