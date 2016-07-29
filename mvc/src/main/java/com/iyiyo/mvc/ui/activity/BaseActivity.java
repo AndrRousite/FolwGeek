@@ -41,6 +41,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestFeature();
         ActivityManager.getActivityManager().addActivity(this);
         setContentView(getResourceId());
         mInflater = getLayoutInflater();
@@ -50,6 +51,9 @@ public abstract class BaseActivity extends AppCompatActivity implements
         initView();
         initData();
         _isVisible = true;
+    }
+
+    protected void requestFeature() {
     }
 
     @Override
