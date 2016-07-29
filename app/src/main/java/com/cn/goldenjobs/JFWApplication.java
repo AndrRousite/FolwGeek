@@ -68,14 +68,14 @@ public class JFWApplication extends BaseApplication {
         config.ledOnMs = 1000;
         config.ledOffMs = 1500;
         // 通知铃声的uri字符串
-        config.notificationSound = "android.resource://com.netease.nim.demo/raw/msg";
+        config.notificationSound = "android.resource://com.cn.goldenjobs/raw/msg";
         options.statusBarNotificationConfig = config;
 
         // 配置保存图片，文件，log 等数据的目录
         // 如果 options 中没有设置这个值，SDK 会使用下面代码示例中的位置作为 SDK 的数据目录。
         // 该目录目前包含 log, file, image, audio, video, thumb 这6个目录。
         // 如果第三方 APP 需要缓存清理功能， 清理这个目录下面个子目录的内容即可。
-        String sdkPath = Environment.getExternalStorageDirectory() + "/" + getPackageName() + "/nim";
+        String sdkPath = Environment.getExternalStorageDirectory() + "/" + getPackageName() + "/iyiyo";
         options.sdkStorageRootPath = sdkPath;
 
         // 配置是否需要预下载附件缩略图，默认为 true

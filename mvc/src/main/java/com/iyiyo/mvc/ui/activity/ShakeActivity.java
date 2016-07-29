@@ -47,7 +47,6 @@ public class ShakeActivity extends BaseHoldBackActivity implements SensorEventLi
     @Override
     public void initToolBar() {
         super.initToolBar();
-        mToolbar.setTitle("");
         mToolbar.setSubtitle("摇一摇");
     }
 
@@ -142,7 +141,8 @@ public class ShakeActivity extends BaseHoldBackActivity implements SensorEventLi
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                showToast("红薯跟你开了个玩笑");
+                showToast("红薯跟你开了个玩笑",0,0);
+                isRequest = false;
                 progress.setVisibility(View.GONE);
             }
         });

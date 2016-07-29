@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.iyiyo.mvc.interf.BaseFragmentInterface;
+import com.iyiyo.mvc.ui.toast.CommonToast;
 import com.iyiyo.mvc.utils.ImageLoader;
 
 import java.io.Serializable;
@@ -83,6 +84,14 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
 
     public void showToast(String text) {
         new Handler().obtainMessage(0x1001,text).sendToTarget();
+    }
+
+    public void showToast(String message, int icon, int gravity) {
+        CommonToast toast = new CommonToast(mContext);
+        toast.setMessage(message);
+        toast.setMessageIc(icon);
+        toast.setLayoutGravity(gravity);
+        toast.show();
     }
 
     protected <T extends View> T findView(int viewId) {

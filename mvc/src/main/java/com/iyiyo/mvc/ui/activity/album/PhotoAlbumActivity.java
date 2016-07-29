@@ -51,19 +51,19 @@ public class PhotoAlbumActivity extends BaseHoldBackActivity implements PhotoAlb
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.BLACK);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            getWindow().setStatusBarColor(Color.BLACK);
+//        }
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if(toolbar != null){
-            setSupportActionBar(toolbar);
-        }
-
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        if(toolbar != null){
+//            setSupportActionBar(toolbar);
+//        }
+//
+//        final ActionBar actionBar = getSupportActionBar();
+//        if (actionBar != null) {
+//            actionBar.setDisplayHomeAsUpEnabled(true);
+//        }
 
         final Intent intent = getIntent();
         mDefaultCount = intent.getIntExtra(EXTRA_SELECT_COUNT, DEFAULT_IMAGE_SIZE);
@@ -115,7 +115,8 @@ public class PhotoAlbumActivity extends BaseHoldBackActivity implements PhotoAlb
 
     @Override
     public void initToolBar() {
-        // 重写ToolBar
+        super.initToolBar();
+        mToolbar.setSubtitle("选择图片");
     }
 
     @Override

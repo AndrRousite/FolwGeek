@@ -34,5 +34,7 @@
     <string name="tab_name_message">消息</string>
     <string name="tab_name_mine">我</string>
 
+    <string name="toolbar_title_snack">摇一摇</string>
+
 
 </resources>

@@ -14,6 +14,7 @@ public abstract class BaseHoldBackActivity extends BaseActivity {
     public void initToolBar() {
         mToolbar = findView(R.id.toolbar);
         mToolbar.setNavigationIcon(R.drawable.ic_back);
+        mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

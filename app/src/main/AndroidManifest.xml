@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cn.goldenjobs">
+          package="com.cn.goldenjobs">
 
     <!-- 访问网络状态-->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <!-- 控制呼吸灯，振动器等，用于新消息提醒 -->
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
     <!-- 外置存储存取权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -19,8 +19,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <!-- 如果需要实时音视频通话模块，下面的权限也是必须的。否则，可以不加 -->
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
 
     <!-- SDK 权限申明, 第三方 APP 接入时，请将 com.netease.nim.demo 替换为自己的包名 -->
@@ -42,24 +42,34 @@
             android:name=".ui.activity.SplashActivity"
             android:theme="@style/Theme.Splash">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.MainActivity" />
-        <activity android:name=".ui.activity.LoginActivity" />
-        <activity android:name=".ui.activity.HomeActivity"
-            android:theme="@style/Theme.Home"
-            android:screenOrientation="portrait"
+        <activity android:name=".ui.activity.MainActivity"/>
+        <activity android:name=".ui.activity.LoginActivity"/>
+        <activity
+            android:name=".ui.activity.HomeActivity"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Home"
             android:windowSoftInputMode="adjustNothing"/>
+        <activity
+            android:name="com.iyiyo.mvc.ui.activity.album.PhotoAlbumActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name="com.iyiyo.mvc.ui.activity.PhotoViewActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.iyiyo.mvc.ui.activity.ShakeActivity"
+            android:screenOrientation="portrait"/>
 
         <!-- APP key, 可以在这里设置，也可以在 SDKOptions 中提供。
             如果 SDKOptions 中提供了，取 SDKOptions 中的值。 -->
         <meta-data
             android:name="com.netease.nim.appKey"
-            android:value="58626a1e3622e6dcebbd866e9cc90159" />
+            android:value="58626a1e3622e6dcebbd866e9cc90159"/>
 
         <!-- 声明云信后台服务，如需保持后台推送，使用独立进程效果会更好。 -->
         <service
@@ -72,9 +82,10 @@
 
         <!-- 云信SDK的监视系统启动和网络变化的广播接收器，用户开机自启动以及网络变化时候重新登录，
             保持和 NimService 同一进程 -->
-        <receiver android:name="com.netease.nimlib.service.NimReceiver"
-                  android:process=":core"
-                  android:exported="false">
+        <receiver
+            android:name="com.netease.nimlib.service.NimReceiver"
+            android:exported="false"
+            android:process=":core">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>

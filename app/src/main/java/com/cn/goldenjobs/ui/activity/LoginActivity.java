@@ -29,7 +29,6 @@ public class LoginActivity extends BaseHoldBackActivity {
     @Override
     public void initToolBar() {
         super.initToolBar();
-        mToolbar.setTitle(null);
         mToolbar.setSubtitle("登录");
         if (getIntent() != null && getIntent().hasExtra("fromSplash")){
             mToolbar.setNavigationIcon(null);
