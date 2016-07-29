@@ -1,8 +1,10 @@
 package com.cn.goldenjobs.ui.activity;
 
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +23,7 @@ import com.cn.goldenjobs.interf.OnTabReselectListener;
 import com.cn.goldenjobs.ui.activity.tabhost.Table;
 import com.iyiyo.mvc.ui.activity.BaseActivity;
 import com.iyiyo.uikit.BottomFragmentTabHost;
+import com.iyiyo.uikit.swipeback.SwipeBackLayout;
 import com.iyiyo.utils.SPUtils;
 
 import butterknife.Bind;
@@ -85,7 +88,6 @@ public class HomeActivity extends BaseActivity implements
         tabhost.setCurrentTab(0);
         tabhost.setOnTabChangedListener(this);
     }
-
 
     @Override
     public void initData() {

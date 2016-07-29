@@ -98,7 +98,7 @@ public class PhotoAlbumFragment extends BaseFragment {
 
     private ListPopupWindow mFolderPopupWindow;
 
-    private TextView mCategoryText;
+    private TextView mCategoryText,mPreviewText;
     private View mPopupAnchorView;
 
     private boolean hasFolderGened = false;
@@ -137,6 +137,8 @@ public class PhotoAlbumFragment extends BaseFragment {
 
         mCategoryText = (TextView) view.findViewById(R.id.category_btn);
         mCategoryText.setText("所有照片");
+        mPreviewText = (TextView) view.findViewById(R.id.preview_btn);
+        mPreviewText.setText("预览照片");
         mCategoryText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,6 +155,13 @@ public class PhotoAlbumFragment extends BaseFragment {
                     index = index == 0 ? index : index - 1;
                     mFolderPopupWindow.getListView().setSelection(index);
                 }
+            }
+        });
+
+        mPreviewText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showToast("图片预览",0,0);
             }
         });
 
@@ -192,6 +201,8 @@ public class PhotoAlbumFragment extends BaseFragment {
         });
 
         mFolderAdapter = new FolderAdapter(getActivity());
+
+        updateDoneText();
     }
 
     @Override
@@ -211,8 +222,9 @@ public class PhotoAlbumFragment extends BaseFragment {
         Point point = ScreenUtils.getScreenSize(getActivity());
         int width = point.x;
         int height = (int) (point.y * (4.5f/8.0f));
+        //int height = point.y;
         mFolderPopupWindow = new ListPopupWindow(getActivity());
-        mFolderPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        mFolderPopupWindow.setBackgroundDrawable(new ColorDrawable((00000)));
         mFolderPopupWindow.setAdapter(mFolderAdapter);
         mFolderPopupWindow.setContentWidth(width);
         mFolderPopupWindow.setWidth(width);
@@ -402,6 +414,7 @@ public class PhotoAlbumFragment extends BaseFragment {
                         mCallback.onImageSelected(image.path);
                     }
                 }
+                updateDoneText();
                 mImageAdapter.select(image);
             } else if (mode == MODE_SINGLE) {
                 if (mCallback != null) {
@@ -544,5 +557,19 @@ public class PhotoAlbumFragment extends BaseFragment {
         void onImageUnselected(String path);
 
         void onCameraShot(File imageFile);
+    }
+
+    /**
+     * Update done button by select image data
+     * @param resultList selected image data
+     */
+    private void updateDoneText(){
+        if(resultList == null || resultList.size()<=0){
+            mPreviewText.setAlpha(0.6f);
+            mPreviewText.setEnabled(false);
+        }else{
+            mPreviewText.setAlpha(1.0f);
+            mPreviewText.setEnabled(true);
+        }
     }
 }
