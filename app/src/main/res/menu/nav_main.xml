@@ -16,4 +16,9 @@
         android:title="@string/about"
         android:icon="@mipmap/icon_info"
         td:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_location"
+        android:title="@string/location"
+        android:icon="@mipmap/icon_info"
+        td:showAsAction="never"/>
 </menu>

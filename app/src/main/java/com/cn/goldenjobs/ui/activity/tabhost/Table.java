@@ -2,7 +2,6 @@ package com.cn.goldenjobs.ui.activity.tabhost;
 
 import com.cn.goldenjobs.R;
 import com.cn.goldenjobs.ui.fragment.ExampleFragment;
-import com.cn.goldenjobs.ui.fragment.ModuleFragment;
 
 /**
  * 地步导航条的Item
@@ -13,7 +12,7 @@ import com.cn.goldenjobs.ui.fragment.ModuleFragment;
 public enum Table {
 
     MODULE(0, R.string.tab_name_module, R.drawable.selector_module,
-            ModuleFragment.class),
+            ExampleFragment.class),
     NEWS(1, R.string.tab_name_news, R.drawable.selector_news,
             ExampleFragment.class),
     CENTER(2, R.string.tab_name_center, R.drawable.selector_center,

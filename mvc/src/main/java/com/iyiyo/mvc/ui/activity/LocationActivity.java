@@ -1,12 +1,10 @@
-package com.cn.goldenjobs.ui.fragment;
-
+package com.iyiyo.mvc.ui.activity;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,11 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.cn.goldenjobs.R;
-import com.cn.goldenjobs.bean.City;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.iyiyo.mvc.ui.fragment.BaseFragment;
+import com.iyiyo.mvc.R;
+import com.iyiyo.mvc.bean.Entity;
 import com.iyiyo.uikit.quicksidebar.QuickSideBarTipsView;
 import com.iyiyo.uikit.quicksidebar.QuickSideBarView;
 import com.iyiyo.uikit.quicksidebar.listener.OnQuickSideBarTouchListener;
@@ -33,21 +30,15 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 /**
- * 瓷片布局的Module界面
- * Created by liu-feng on 2016/7/15.
+ * Locations
+ * Created by liu-feng on 2016/7/29.
  * 邮箱:w710989327@foxmail.com
  */
-public class ModuleFragment extends BaseFragment implements OnQuickSideBarTouchListener {
+public class LocationActivity extends BaseHoldBackActivity implements OnQuickSideBarTouchListener {
 
-    @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
-    @Bind(R.id.quickSideBarTipsView)
     QuickSideBarTipsView quickSideBarTipsView;
-    @Bind(R.id.quickSideBarView)
     QuickSideBarView quickSideBarView;
 
     private String response;
@@ -56,15 +47,24 @@ public class ModuleFragment extends BaseFragment implements OnQuickSideBarTouchL
 
     @Override
     public int getResourceId() {
-        return R.layout.fragment_module;
+        return R.layout.activity_location;
     }
 
     @Override
-    public void initView(View view) {
+    public void initToolBar() {
+        super.initToolBar();
+        mToolbar.setSubtitle("城市列表");
+    }
+
+    @Override
+    public void initView() {
+        recyclerView = findView(R.id.recyclerView);
+        quickSideBarTipsView = findView(R.id.quickSideBarTipsView);
+        quickSideBarView = findView(R.id.quickSideBarView);
         //设置监听
         quickSideBarView.setOnQuickSideBarTouchListener(this);
         //设置列表数据和浮动header
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new CityListAdapter() {
             @Override
@@ -79,7 +79,7 @@ public class ModuleFragment extends BaseFragment implements OnQuickSideBarTouchL
             public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
                 TextView textView = (TextView) holder.itemView;
                 textView.setText(getItem(position).getCityName());
-                textView.setTextColor(mContext.getResources().getColor(R.color.main_title_color));
+                textView.setTextColor(getResources().getColor(R.color.main_title_color));
             }
         };
     }
@@ -87,7 +87,7 @@ public class ModuleFragment extends BaseFragment implements OnQuickSideBarTouchL
     @Override
     public void initData() {
         try {
-            InputStream is = mContext.getAssets().open("city_list.txt");
+            InputStream is = getAssets().open("city_list.txt");
             int ch = 0;
             ByteArrayOutputStream out = new ByteArrayOutputStream(); //实现了一个输出流
             while ((ch = is.read()) != -1) {
@@ -124,11 +124,11 @@ public class ModuleFragment extends BaseFragment implements OnQuickSideBarTouchL
             adapter.addAll(cities);
             recyclerView.setAdapter(adapter);
 
-//            final StickyRecyclerHeadersDecoration headersDecor = new StickyRecyclerHeadersDecoration(adapter);
-//            recyclerView.addItemDecoration(headersDecor);
+            //            final StickyRecyclerHeadersDecoration headersDecor = new StickyRecyclerHeadersDecoration(adapter);
+            //            recyclerView.addItemDecoration(headersDecor);
 
             // Add decoration for dividers between list items
-            recyclerView.addItemDecoration(new DividerDecoration(mContext));
+            recyclerView.addItemDecoration(new DividerDecoration(this));
         }
     }
 
@@ -148,7 +148,7 @@ public class ModuleFragment extends BaseFragment implements OnQuickSideBarTouchL
 
     @Override
     public void onLetterTouching(boolean touching) {
-//可以自己加入动画效果渐显渐隐
+        //可以自己加入动画效果渐显渐隐
         quickSideBarTipsView.setVisibility(touching ? View.VISIBLE : View.INVISIBLE);
     }
 
@@ -262,7 +262,7 @@ public class ModuleFragment extends BaseFragment implements OnQuickSideBarTouchL
                 final int top = Math.max(recyclerViewTop, child.getBottom() + params.bottomMargin);
                 final int bottom = Math.min(recyclerViewBottom, top + mDivider.getIntrinsicHeight());
                 mDivider.setBounds(left, top, right, bottom);
-               // c.drawColor(mContext.getResources().getColor(R.color.main_division_color));
+                // c.drawColor(getResources().getColor(R.color.main_division_color));
                 mDivider.draw(c);
             }
         }
@@ -292,6 +292,33 @@ public class ModuleFragment extends BaseFragment implements OnQuickSideBarTouchL
             } else {
                 outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
             }
+        }
+    }
+
+    class City extends Entity {
+
+        /**
+         * cityName : 鞍山
+         * firstLetter : A
+         */
+
+        private String cityName;
+        private String firstLetter;
+
+        public void setCityName(String cityName) {
+            this.cityName = cityName;
+        }
+
+        public void setFirstLetter(String firstLetter) {
+            this.firstLetter = firstLetter;
+        }
+
+        public String getCityName() {
+            return cityName;
+        }
+
+        public String getFirstLetter() {
+            return firstLetter;
         }
     }
 }

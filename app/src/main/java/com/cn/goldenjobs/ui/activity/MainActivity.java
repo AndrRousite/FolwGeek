@@ -18,6 +18,7 @@ import android.widget.GridView;
 
 import com.cn.goldenjobs.R;
 import com.iyiyo.mvc.ui.activity.BaseActivity;
+import com.iyiyo.mvc.ui.activity.LocationActivity;
 import com.iyiyo.mvc.ui.activity.PhotoViewActivity;
 import com.iyiyo.mvc.ui.activity.ShakeActivity;
 import com.iyiyo.mvc.ui.activity.album.MultiImageSelector;
@@ -131,6 +132,9 @@ public class MainActivity extends BaseActivity implements NavigationView
                 break;
             case R.id.menu_about: // 更多
                 startActivity(new Intent(this, ShakeActivity.class));
+                break;
+            case R.id.menu_location: // 城市列表
+                startActivity(new Intent(this, LocationActivity.class));
                 break;
         }
 
