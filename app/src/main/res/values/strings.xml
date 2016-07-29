@@ -21,6 +21,7 @@
     <string name="reminder">提醒</string>
     <string name="about">关于</string>
     <string name="location">地址</string>
+    <string name="capture">二维码</string>
     <string name="more">更多</string>
     <string name="android">Android</string>
     <string name="apple">Ios</string>

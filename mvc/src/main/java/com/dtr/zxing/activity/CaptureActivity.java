@@ -16,12 +16,16 @@
 package com.dtr.zxing.activity;
 
 import android.Manifest;
+import android.annotation.TargetApi;
+import android.graphics.Color;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -36,8 +40,9 @@ import com.dtr.zxing.utils.CaptureActivityHandler;
 import com.dtr.zxing.utils.InactivityTimer;
 import com.google.zxing.Result;
 import com.iyiyo.mvc.R;
-import com.iyiyo.mvc.ui.activity.BaseActivity;
+import com.iyiyo.mvc.ui.activity.BaseHoldBackActivity;
 import com.iyiyo.utils.L;
+import com.iyiyo.utils.SystemUtils;
 
 
 import java.io.IOException;
@@ -53,7 +58,7 @@ import pub.devrel.easypermissions.EasyPermissions;
  * 邮箱:w710989327@foxmail.com
  * https://github.com/Unlm
  */
-public final class CaptureActivity extends BaseActivity implements
+public final class CaptureActivity extends BaseHoldBackActivity implements
         SurfaceHolder.Callback, EasyPermissions.PermissionCallbacks {
 
     private static final String TAG = CaptureActivity.class.getSimpleName();
@@ -100,9 +105,29 @@ public final class CaptureActivity extends BaseActivity implements
 
     @Override
     public void initToolBar() {
-        if (android.os.Build.VERSION.SDK_INT >= 11) {
-            getSupportActionBar().hide();
+        super.initToolBar();
+        mToolbar.setSubtitle("二维码");
+        mToolbar.setBackgroundColor(Color.TRANSPARENT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            initStatusBar(true);
         }
+    }
+
+    @TargetApi(19)
+    private void initStatusBar(boolean flag){
+        Window win = getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        if (flag) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
+        /** 这端代码需要考虑内存泄漏问题 */
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mToolbar.getLayoutParams();
+        params.topMargin = SystemUtils.getStatusBarHeight(this);
+        mToolbar.setLayoutParams(params);
     }
 
     @Override

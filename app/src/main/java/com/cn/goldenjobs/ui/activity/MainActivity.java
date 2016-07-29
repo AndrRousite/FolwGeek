@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.GridView;
 
 import com.cn.goldenjobs.R;
+import com.dtr.zxing.activity.CaptureActivity;
 import com.iyiyo.mvc.ui.activity.BaseActivity;
 import com.iyiyo.mvc.ui.activity.LocationActivity;
 import com.iyiyo.mvc.ui.activity.PhotoViewActivity;
@@ -135,6 +136,9 @@ public class MainActivity extends BaseActivity implements NavigationView
                 break;
             case R.id.menu_location: // 城市列表
                 startActivity(new Intent(this, LocationActivity.class));
+                break;
+            case R.id.menu_capture: // 二维码
+                startActivity(new Intent(this, CaptureActivity.class));
                 break;
         }
 
