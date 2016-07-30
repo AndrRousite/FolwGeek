@@ -40,4 +40,5 @@ dependencies {
     // circle image view
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile project(':mvc')
+    compile 'com.alibaba:fastjson:1.2.14'
 }

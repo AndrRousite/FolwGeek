@@ -34,6 +34,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.Bind;
@@ -45,6 +46,7 @@ public abstract class BaseListFragment<T extends Entity> extends BaseFragment
         implements SwipeRefreshLayout.OnRefreshListener, OnItemClickListener, OnScrollListener {
 
     public static final String BUNDLE_KEY_CATALOG = "BUNDLE_KEY_CATALOG";
+    private long lastClickTime = 0;
     protected SwipeRefreshLayout mSwipeRefreshLayout;
     protected ListView mListView;
     protected ListBaseAdapter<T> mAdapter;
@@ -202,6 +204,10 @@ public abstract class BaseListFragment<T extends Entity> extends BaseFragment
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
+        long currentTime = Calendar.getInstance().getTimeInMillis();
+        if (currentTime - lastClickTime < 1000) {
+            return;
+        }
     }
 
     private String getCacheKey() {
@@ -306,7 +312,7 @@ public abstract class BaseListFragment<T extends Entity> extends BaseFragment
         }
 
         if (mResult != null && !mResult.OK()) {
-            showToast(mResult.getErrorMessage(),0,0);
+            showToast(mResult.getErrorMessage(), 0, 0);
             // 注销登陆，密码已经修改，cookie，失效了
         }
 
@@ -487,7 +493,7 @@ public abstract class BaseListFragment<T extends Entity> extends BaseFragment
     protected void saveToReadedList(final View view,
                                     final String key) {
         // 放入已读列表
-        BaseApplication.putReadedPostList( key, "true");
+        BaseApplication.putReadedPostList(key, "true");
         // TODO
     }
 

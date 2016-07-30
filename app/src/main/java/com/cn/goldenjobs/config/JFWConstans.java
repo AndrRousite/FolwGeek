@@ -23,8 +23,10 @@ public class JFWConstans {
     public static final String KEY_LOGIN_STATE = "KEY_LOGIN_STATE";
     public static final String KEY_PORTRAIT = "KEY_PORTRAIT";
     public static final String KEY_COOKIES = "KEY_COOKIES";
+    public static final String KEY_TOKEN = "KEY_TOKEN";
 
     /** 夜间风格切换 */
     public static final String FILE_NAME = "APPLICATION_SETTING";
     public static final String KEY_THEME = "KEY_THEME";
+
 }
