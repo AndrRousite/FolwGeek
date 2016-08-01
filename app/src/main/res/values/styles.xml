@@ -18,4 +18,10 @@
         <item name="android:textColorPrimary">@color/textColorPrimary_home</item>
     </style>
 
+    <style name="item_list_divider">
+        <item name="android:layout_height">1px</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/main_division_color</item>
+    </style>
+
 </resources>

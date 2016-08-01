@@ -49,6 +49,11 @@ public abstract class BaseViewPagerFragment extends BaseFragment {
     }
 
     @Override
+    public int getResourceId() {
+        return 0;
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             int pos = savedInstanceState.getInt("position");

@@ -569,4 +569,9 @@ public abstract class BaseListFragment<T extends Entity> extends BaseFragment
             }
         }
     }
+
+    @Override
+    public void initData() {
+
+    }
 }

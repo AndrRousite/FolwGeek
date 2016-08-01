@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <string-array name="message_array">
+        <item>会话</item>
+        <item>通讯录</item>
+        <item>直播间</item>
+    </string-array>
+
+</resources>
